@@ -6,7 +6,7 @@
 
 
 body{
-    background-color: #ebebeb;
+    background-color: #dad9d9;
     font-family: Arial, Helvetica, sans-serif;
     color: black;
 }
@@ -430,7 +430,6 @@ form button:hover{
     cursor: pointer;
     display: inline-block;
     font-family: Neucha, sans-serif;
-    font-size: 1rem;
     line-height: 23px;
     outline: none;
     text-decoration: none;
@@ -447,6 +446,70 @@ form button:hover{
 .categoria:hover {
   transform: translate3d(0, 2px, 0);
   color: #f26065;
+}
+
+
+a.categoria {
+    text-align: center;
+    background-color: #fff;
+    background-size: 4px 3px;
+    border-style: solid;
+    border-width: 9px;
+    border-color: #36363600;
+    /* deixe o botao com sombras apenas na direita e embaixo */
+    box-shadow: 3px 3px 4px 1px #1818182d;
+    box-sizing: border-box;
+    color: #f26065;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Neucha, sans-serif;
+    line-height: 23px;
+    outline: none;
+    font-size: 12px;
+    text-decoration: none;
+    transition: all 235ms ease-in-out;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 10px 5px 5px 5px;
+    width: 140px;
+    height: 38.2px;
+}
+
+a.categoria:hover {
+  transform: translate3d(0, 2px, 0);
+  color: #f26065;
+  border-style: solid;
+  border-width: 9px;
+  border-color: #36363621;
+  box-shadow: 2px 2px 4px 1px #1818182d;
+
+}
+
+
+.selected {
+    text-align: center;
+    background-color: #f26065;
+    background-size: 4px 3px;
+    border-style: solid;
+    border-width: 9px;
+    border-color: #ffffff00;
+    /* deixe o botao com sombras apenas na direita e embaixo */
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Neucha, sans-serif;
+    line-height: 23px;
+    outline: none;
+    font-size: 12px;
+    text-decoration: none;
+    transition: all 235ms ease-in-out;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin: 10px 5px 5px 5px;
+    width: 140px;
+    height: 38.2px;
+    transform: translate3d(0, 6px, 0);
 }
 
 .submit {

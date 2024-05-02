@@ -125,3 +125,25 @@ cross.addEventListener('click', ()=>{
     eyeBtn1.classList.add('fa-eye')
     eyeBtn1.classList.remove("fa-eye-slash")
 })
+
+function toggleSelection(element) {
+    if(element.classList.contains("categoria")) {
+        // Remove a classe "selected" de todos os elementos
+        var buttons = document.getElementsByClassName("selected");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.add("categoria");
+        }
+
+        element.classList.remove("categoria");
+        element.classList.add("selected");
+    }
+    else {
+        element.classList.remove("selected");
+        element.classList.add("categoria");
+    }
+}
+
+function setValue(value) {
+    // Define o valor do campo oculto com o valor do botão selecionado
+    document.getElementById("categoriaSelecionada").value = value;
+}

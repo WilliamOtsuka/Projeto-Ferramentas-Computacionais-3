@@ -41,16 +41,20 @@
                     </div>
                     <div class="buttons">
                         <!-- cadastrar botões que dirá qual categoria o problema está relacionado -->
-                        <button class="categoria">Buracos</button>
-                        <button class="categoria">Acidentes</button>
-                        <button class="categoria">Lixo e limpeza</button>
-                        <button class="categoria">Coleta de Lixo</button>
-                        <button class="categoria">Transito e Transporte</button>
+                        <a class="categoria" onclick="toggleSelection(this)">Buracos</a>
+                        <a class="categoria" onclick="toggleSelection(this)">Acidentes</a>
+                        <!-- <button class="categoria" onclick="selectOnlyThis(this)">Lixo e limpeza</button>
+                        <button class="categoria" onclick="selectOnlyThis(this)">Coleta de Lixo</button>
+                        <button class="categoria" onclick="selectOnlyThis(this)">Transito e Transporte</button> -->
                     </div>
                 </div>
+                <input type="hidden" id="categoriaSelecionada" name="categoriaSelecionada">
+                
                 <button type="submit" class="submit">Enviar</button>
             </form>
         </div>
     </div>
 </body>
+
+<script src="js/javascript.js"></script>
 </html>
