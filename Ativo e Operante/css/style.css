@@ -289,7 +289,7 @@ nav img {
     font-size: 22px;
 }
 
-.fa-user-circle, .fa-lock, .fa-envelope, .fa-building-columns{
+.fa-user-circle, .fa-lock, .fa-envelope, .fa-id-card-clip{
     left: 10px;
 }
 
@@ -367,7 +367,7 @@ form button:hover{
     display:block;
     width: 100px;
     padding: 5px 0;
-    font: 16px 'Arial', sans-serif;
+    font: 14px 'Arial', sans-serif;
 }
 
 .func {
@@ -378,13 +378,21 @@ form button:hover{
     margin: 10px 0 0 50px;
 }
 
-.denuncia .form input {
+.titulo {
     box-sizing: content-box;
     color:#000000;
     /*fazer com que o placeholder nao seja escondido pelo padding*/
-    padding: 10px 10px 10px 30px;
-    width: 200px;
-    font: 12px'Arial', Verdana, Helvetica, sans-serif;
+    padding: 10px 10px 10px 15px;
+    font: 14px'Arial', Verdana, Helvetica, sans-serif;
+    margin-bottom: 15px;
+}
+
+.nome {
+    box-sizing: content-box;
+    color:#000000;
+    /*fazer com que o placeholder nao seja escondido pelo padding*/
+    padding: 10px 10px 10px 15px;
+    font: 14px'Arial', Verdana, Helvetica, sans-serif;
     margin-bottom: 15px;
 }
 
@@ -393,7 +401,7 @@ form button:hover{
     border:0px;
     width:255px;
     height:140px;
-    padding:10px 10px 10px 30px;
+    padding:10px 10px 10px 10px;
     font: 12px 'Arial', Verdana, Helvetica, sans-serif;
     color:#000000;
     resize: none;
@@ -412,8 +420,23 @@ form button:hover{
     border-radius: 10px;
 }
 
+.vl {
+    border-left: 1px solid #b4b4b44b;
+    height: 300px;
+    margin-left: 10.8%;
+}
+
+.categorias {
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #000000;
+    font-weight: lighter;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .buttons {
-    margin: 20px 0 0 90px;
+    margin: 20px 0 0 43px;
 }
 
 .categoria {
@@ -480,11 +503,10 @@ a.categoria:hover {
   color: #f26065;
   border-style: solid;
   border-width: 9px;
-  border-color: #36363621;
+  border-color: #36363600;
   box-shadow: 2px 2px 4px 1px #1818182d;
 
 }
-
 
 .selected {
     text-align: center;
@@ -512,17 +534,119 @@ a.categoria:hover {
     transform: translate3d(0, 6px, 0);
 }
 
+.selected:hover {
+    color: #ffffff;
+}
+
+.checkbox-wrapper-16 *,
+.checkbox-wrapper-16 *:after,
+.checkbox-wrapper-16 *:before {
+    box-sizing: border-box;
+}
+
+.checkbox-wrapper-16 .checkbox-input {
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(100%);
+            clip-path: inset(100%);
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+.checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile {
+    border-color: #2260ff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    color: #2260ff;
+}
+
+.checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile:before {
+    transform: scale(1);
+    opacity: 1;
+    background-color: #2260ff;
+    border-color: #2260ff;
+    
+}
+
+.checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile .checkbox-icon,
+.checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile .checkbox-label {
+    color: #2260ff;
+}
+
+.checkbox-wrapper-16 .checkbox-input:focus + .checkbox-tile {
+    border-color: #2260ff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px #b5c9fc;
+}
+
+
+
+.checkbox-wrapper-16 .checkbox-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 7rem;
+    min-height: 7rem;
+    border-radius: 0.5rem;
+    border: 2px solid #b5bfd9;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.15s ease;
+    cursor: pointer;
+    position: relative;
+    top: 170px;
+    left: 50px;
+}
+
+.checkbox-wrapper-16 .checkbox-tile:before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid #b5bfd9;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 0.25rem;
+    left: 0.25rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: 0.25s ease;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' fill='%23FFFFFF' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'%3E%3C/rect%3E%3Cpolyline points='216 72.005 104 184 48 128.005' fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.checkbox-wrapper-16 .checkbox-tile:hover {
+    border-color: #2260ff;
+}
+
+.checkbox-wrapper-16 .checkbox-tile:hover:before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.checkbox-wrapper-16 .checkbox-icon {
+    transition: 0.375s ease;
+    color: #494949;
+}
+
+.checkbox-wrapper-16 .checkbox-label {
+    color: #707070;
+    transition: 0.375s ease;
+    text-align: center;
+}
+
 .submit {
     --color: #f26065;
     font-family: inherit;
     display: inline-block;
-    width: 6em;
-    height: 2.6em;
+    width: 5em;
+    height: 2.7em;
     line-height: 2.5em;
     overflow: hidden;
     cursor: pointer;
     margin: 20px 10px 20px 45px;
-    font-size: 17px;
+    font-size: 14px;
     z-index: 1;
     color: var(--color);
     border: 2px solid var(--color);

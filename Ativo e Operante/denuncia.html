@@ -30,23 +30,38 @@
                 <div class="func">
                     <div>
                         <div class="input">
+                            <span>Título</span>
+                            <input type="text" name="titulo" class="titulo" tabindex=1 style="width: 220px"/>
+                        </div>
+
+                        <div class="input">
                             <span>CEP</span>
-                            <input type="text" name="name" class="name" placeholder="xxxxxx-xx" tabindex=1 />
+                            <input type="text" name="name" class="nome" placeholder="xxxxxx-xx" tabindex=1 style="width: 80px;"/>
                         </div>
                         
                         <div class="input">
-                            <span>Message</span>
-                            <textarea class="message" placeholder="Enter your message" tabindex=4></textarea>
+                            <span>Denúncia</span>
+                            <textarea class="message" placeholder="Escreva a sua denúncia..." tabindex=4></textarea>
                         </div>
+                        
+                        <div class="checkbox-wrapper-16">
+                            <label class="checkbox-wrapper">
+                              <input type="checkbox" class="checkbox-input" />
+                              <span class="checkbox-tile">
+                                <span class="checkbox-label">Sketch</span>
+                              </span>
+                            </label>
+                        </div>
+                        
                     </div>
+                    <div class="vl"></div>
                     <div class="buttons">
+                        <h2 class="categorias">Categorias</h2>
                         <!-- cadastrar botões que dirá qual categoria o problema está relacionado -->
                         <a class="categoria" onclick="toggleSelection(this)">Buracos</a>
                         <a class="categoria" onclick="toggleSelection(this)">Acidentes</a>
-                        <!-- <button class="categoria" onclick="selectOnlyThis(this)">Lixo e limpeza</button>
-                        <button class="categoria" onclick="selectOnlyThis(this)">Coleta de Lixo</button>
-                        <button class="categoria" onclick="selectOnlyThis(this)">Transito e Transporte</button> -->
                     </div>
+                    
                 </div>
                 <input type="hidden" id="categoriaSelecionada" name="categoriaSelecionada">
                 
