@@ -147,3 +147,12 @@ function setValue(value) {
     // Define o valor do campo oculto com o valor do botão selecionado
     document.getElementById("categoriaSelecionada").value = value;
 }
+
+function checkOnlyOne(clickedCheckbox) {
+    var checkboxes = document.getElementsByClassName('checkbox-input');
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i] !== clickedCheckbox) {
+            checkboxes[i].checked = false;
+        }
+    }
+}

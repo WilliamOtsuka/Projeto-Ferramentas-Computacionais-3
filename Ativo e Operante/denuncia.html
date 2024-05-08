@@ -43,18 +43,9 @@
                             <span>Denúncia</span>
                             <textarea class="message" placeholder="Escreva a sua denúncia..." tabindex=4></textarea>
                         </div>
-                        
-                        <div class="checkbox-wrapper-16">
-                            <label class="checkbox-wrapper">
-                              <input type="checkbox" class="checkbox-input" />
-                              <span class="checkbox-tile">
-                                <span class="checkbox-label">Sketch</span>
-                              </span>
-                            </label>
-                        </div>
-                        
                     </div>
-                    <div class="vl"></div>
+
+                    <div class="vl" style="margin-left: 85px;"></div>
                     <div class="buttons">
                         <h2 class="categorias">Categorias</h2>
                         <!-- cadastrar botões que dirá qual categoria o problema está relacionado -->
@@ -62,8 +53,55 @@
                         <a class="categoria" onclick="toggleSelection(this)">Acidentes</a>
                     </div>
                     
+                    <input type="hidden" id="categoriaSelecionada" name="categoriaSelecionada">
                 </div>
-                <input type="hidden" id="categoriaSelecionada" name="categoriaSelecionada">
+
+                <div class="urg">
+                    <div class="checkbox-wrapper-16">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="NU" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                            <span class="checkbox-tile" style="border-color: #036bf3fd;">
+                                <span class="checkbox-label">Não Urgente</span>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox-wrapper-16">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="PU" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                            <span class="checkbox-tile" style="border-color: #00d600;">
+                                <span class="checkbox-label" style="margin-top: 20%;">Pouco <br> Urgente</span>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox-wrapper-16">
+                        <label class="checkbox-wrapper">
+                      <input type="checkbox" id="U" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                      <span class="checkbox-tile" style="border-color: #f3db03fd;">
+                          <span class="checkbox-label"> Urgente</span>
+                        </span>
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox-wrapper-16">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="MU" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                            <span class="checkbox-tile" style="border-color: #ffac3ffd;">
+                                <span class="checkbox-label" style="margin-top: 20%;">Muito<br> Urgente</span>
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-wrapper-16">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                            <span class="checkbox-tile" style="border-color: #ff0000fd;">
+                                <span class="checkbox-label">Emergência</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
                 
                 <button type="submit" class="submit">Enviar</button>
             </form>

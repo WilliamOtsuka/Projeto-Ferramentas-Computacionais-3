@@ -344,7 +344,7 @@ form button:hover{
 
 .denuncia .form {
     width:790px;
-    float:left;
+    float: left;
     background-color: #ffffff;
     padding-top: 40px;
     padding-bottom: 100px;
@@ -422,8 +422,7 @@ form button:hover{
 
 .vl {
     border-left: 1px solid #b4b4b44b;
-    height: 300px;
-    margin-left: 10.8%;
+    height: 350px;
 }
 
 .categorias {
@@ -538,6 +537,11 @@ a.categoria:hover {
     color: #ffffff;
 }
 
+.urg {
+    display: flex;
+    margin-left: 70px;
+}
+
 .checkbox-wrapper-16 *,
 .checkbox-wrapper-16 *:after,
 .checkbox-wrapper-16 *:before {
@@ -549,8 +553,8 @@ a.categoria:hover {
     -webkit-clip-path: inset(100%);
             clip-path: inset(100%);
     overflow: hidden;
-    position: absolute;
     white-space: nowrap;
+    visibility: hidden;
 }
 
 .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile {
@@ -562,7 +566,7 @@ a.categoria:hover {
 .checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile:before {
     transform: scale(1);
     opacity: 1;
-    background-color: #2260ff;
+    background-color: #416cda;
     border-color: #2260ff;
     
 }
@@ -585,7 +589,7 @@ a.categoria:hover {
     align-items: center;
     justify-content: center;
     width: 7rem;
-    min-height: 7rem;
+    min-height: 100px;
     border-radius: 0.5rem;
     border: 2px solid #b5bfd9;
     background-color: #fff;
@@ -593,8 +597,8 @@ a.categoria:hover {
     transition: 0.15s ease;
     cursor: pointer;
     position: relative;
-    top: 170px;
     left: 50px;
+    margin-right: 10px;
 }
 
 .checkbox-wrapper-16 .checkbox-tile:before {
@@ -615,6 +619,7 @@ a.categoria:hover {
     background-size: 12px;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+    
 }
 .checkbox-wrapper-16 .checkbox-tile:hover {
     border-color: #2260ff;
@@ -625,15 +630,11 @@ a.categoria:hover {
     opacity: 1;
 }
 
-.checkbox-wrapper-16 .checkbox-icon {
-    transition: 0.375s ease;
-    color: #494949;
-}
-
 .checkbox-wrapper-16 .checkbox-label {
     color: #707070;
     transition: 0.375s ease;
     text-align: center;
+    margin-top: 30%;
 }
 
 .submit {
