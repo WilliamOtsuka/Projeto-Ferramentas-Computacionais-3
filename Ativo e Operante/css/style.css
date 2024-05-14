@@ -347,7 +347,7 @@ form button:hover{
     float: left;
     background-color: #ffffff;
     padding-top: 40px;
-    padding-bottom: 100px;
+    padding-bottom: 20px;
     margin-top: 8%;
     margin-bottom: 8%;
     border-radius: 10px;
@@ -422,7 +422,20 @@ form button:hover{
 
 .vl {
     border-left: 1px solid #b4b4b44b;
-    height: 350px;
+    height: 360px;
+}
+
+.dropdown {
+    margin-left: 46px;
+    padding: 5px 5px;
+    width: 300px;
+    border-radius: 10px;
+    border: #cfcfcf solid 1px;
+    background-color: #ffffff;
+}
+
+.buttons {
+    margin: 20px 0 0 43px;
 }
 
 .categorias {
@@ -432,10 +445,6 @@ form button:hover{
     color: #000000;
     font-weight: lighter;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-.buttons {
-    margin: 20px 0 0 43px;
 }
 
 .categoria {
@@ -539,7 +548,8 @@ a.categoria:hover {
 
 .urg {
     display: flex;
-    margin-left: 70px;
+    margin-left: 90px;
+    margin-top: 10px;
 }
 
 .checkbox-wrapper-16 *,
@@ -549,31 +559,55 @@ a.categoria:hover {
 }
 
 .checkbox-wrapper-16 .checkbox-input {
-    clip: rect(0 0 0 0);
-    -webkit-clip-path: inset(100%);
-            clip-path: inset(100%);
-    overflow: hidden;
-    white-space: nowrap;
     visibility: hidden;
 }
 
-.checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile {
-    border-color: #2260ff;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    color: #2260ff;
-}
-
-.checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile:before {
+.checkbox-wrapper-16.checkbox-wrapper-16:nth-child(1) .checkbox-input:checked + .checkbox-tile:before {
     transform: scale(1);
     opacity: 1;
     background-color: #416cda;
     border-color: #2260ff;
-    
+}
+.checkbox-wrapper-16.checkbox-wrapper-16:nth-child(2) .checkbox-input:checked + .checkbox-tile:before {
+    transform: scale(1);
+    opacity: 1;
+    background-color: #34ff22;
+    border-color: #4eda41;
 }
 
-.checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile .checkbox-icon,
-.checkbox-wrapper-16 .checkbox-input:checked + .checkbox-tile .checkbox-label {
-    color: #2260ff;
+.checkbox-wrapper-16.checkbox-wrapper-16:nth-child(3) .checkbox-input:checked + .checkbox-tile:before {
+    transform: scale(1);
+    opacity: 1;
+    background-color: #f3db03fd;
+    border-color: #e9d208fd;
+}
+.checkbox-wrapper-16.checkbox-wrapper-16:nth-child(4) .checkbox-input:checked + .checkbox-tile:before {
+    transform: scale(1);
+    opacity: 1;
+    background-color: #ffac3ffd;
+    border-color: #e6870afd;
+}
+.checkbox-wrapper-16.checkbox-wrapper-16:nth-child(5) .checkbox-input:checked + .checkbox-tile:before {
+    transform: scale(1);
+    opacity: 1;
+    background-color: #ff0000fd;
+    border-color: #c02020fd;
+}
+
+.checkbox-wrapper-16:nth-child(1) .checkbox-input:checked + .checkbox-tile .checkbox-label{
+    color: #003cff;
+}
+.checkbox-wrapper-16:nth-child(2) .checkbox-input:checked + .checkbox-tile .checkbox-label{
+    color: #1cdf03;
+}
+.checkbox-wrapper-16:nth-child(3) .checkbox-input:checked + .checkbox-tile .checkbox-label{
+    color: #dac508fd;
+}
+.checkbox-wrapper-16:nth-child(4) .checkbox-input:checked + .checkbox-tile .checkbox-label{
+    color: #ffac3ffd;
+}
+.checkbox-wrapper-16:nth-child(5) .checkbox-input:checked + .checkbox-tile .checkbox-label{
+    color: #ff0000fd;
 }
 
 .checkbox-wrapper-16 .checkbox-input:focus + .checkbox-tile {
@@ -581,23 +615,88 @@ a.categoria:hover {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 0 4px #b5c9fc;
 }
 
-
-
-.checkbox-wrapper-16 .checkbox-tile {
+.checkbox-wrapper-16:nth-child(1) .checkbox-tile{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 7rem;
-    min-height: 100px;
+    min-height: 110px;
     border-radius: 0.5rem;
-    border: 2px solid #b5bfd9;
+    border: 2px solid #0331ff;
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     transition: 0.15s ease;
     cursor: pointer;
     position: relative;
-    left: 50px;
+    margin-right: 10px;
+}
+
+.checkbox-wrapper-16:nth-child(2) .checkbox-tile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 7rem;
+    min-height: 110px;
+    border-radius: 0.5rem;
+    border: 2px solid #20ff03;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.15s ease;
+    cursor: pointer;
+    position: relative;
+    margin-right: 10px;
+}
+
+.checkbox-wrapper-16:nth-child(3) .checkbox-tile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 7rem;
+    min-height: 110px;
+    border-radius: 0.5rem;
+    border: 2px solid #f3db03fd;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.15s ease;
+    cursor: pointer;
+    position: relative;
+    margin-right: 10px;
+}
+
+.checkbox-wrapper-16:nth-child(4) .checkbox-tile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 7rem;
+    min-height: 110px;
+    border-radius: 0.5rem;
+    border: 2px solid #ffac3ffd;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.15s ease;
+    cursor: pointer;
+    position: relative;
+    margin-right: 10px;
+}
+
+.checkbox-wrapper-16:nth-child(5) .checkbox-tile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 7rem;
+    min-height: 110px;
+    border-radius: 0.5rem;
+    border: 2px solid #ff0000fd;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.15s ease;
+    cursor: pointer;
+    position: relative;
     margin-right: 10px;
 }
 
@@ -621,9 +720,6 @@ a.categoria:hover {
     background-position: 50% 50%;
     
 }
-.checkbox-wrapper-16 .checkbox-tile:hover {
-    border-color: #2260ff;
-}
 
 .checkbox-wrapper-16 .checkbox-tile:hover:before {
     transform: scale(1);
@@ -631,10 +727,9 @@ a.categoria:hover {
 }
 
 .checkbox-wrapper-16 .checkbox-label {
-    color: #707070;
+    color: #000000;
     transition: 0.375s ease;
     text-align: center;
-    margin-top: 30%;
 }
 
 .submit {
@@ -653,7 +748,7 @@ a.categoria:hover {
     border: 2px solid var(--color);
     border-radius: 6px;
     position: relative;
-    top: 0;
+    top: 10px;
     left: 0;
     background-color: #ffffff;
 }
