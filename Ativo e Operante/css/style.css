@@ -68,8 +68,8 @@ a:hover {
 }
 
 nav img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 15px;
     padding: 10px;
     margin: 4px;
@@ -435,13 +435,13 @@ form button:hover{
 }
 
 .buttons {
-    margin: 20px 0 0 43px;
+    margin-left: 45px;
 }
 
 .categorias {
     font-size: 15px;
     text-align: center;
-    margin-bottom: 10px;
+    margin: 20px 0 0;
     color: #000000;
     font-weight: lighter;
     font-family: Arial, Helvetica, sans-serif;
