@@ -1,0 +1,5 @@
+# Created at 2024-05-15T19:30:08.323
+Boot Manifest-JAR contains absolute paths in classpath 'D:\AtivoOperante2024\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

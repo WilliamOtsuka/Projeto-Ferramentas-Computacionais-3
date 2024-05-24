@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denuncie!</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>  
+        <nav>
+            <div class="teste">
+                <img src="assets/favicon/favicon.png" alt="">
+                <a href="" class="logo"> Ativo e Operante</a>
+            </div>
+            <div class="list">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="denuncia.html">Denuncie!</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </div>
+            <a href="login.html" class="login">Login</a>
+        </nav>
+    </header>
+    <div class="denuncia">
+        <div class="form">
+            <p>Denuncie!</p>
+            <form action="" id="contactForm" method="post">
+                <div class="func">
+                    <div>
+                        <div class="input">
+                            <span>Título</span>
+                            <input type="text" name="titulo" class="titulo" tabindex=1 style="width: 220px"/>
+                        </div>
+
+                        <div class="input">
+                            <span>CEP</span>
+                            <input type="text" name="name" class="nome" placeholder="xxxxxx-xx" tabindex=1 style="width: 80px;"/>
+                        </div>
+                        
+                        <div class="input">
+                            <span>Denúncia</span>
+                            <textarea class="message" placeholder="Escreva a sua denúncia..." tabindex=4></textarea>
+                        </div>
+                    </div>
+
+                    <div class="vl" style="margin-left: 85px;"></div>
+
+                    <div>
+                        <select class="dropdown" >
+                            <option value="">Selecione o Orgão Competente</option>
+                            <!-- <option value=""></option> -->
+                        </select>
+                        
+                        <h2 class="categorias">Categorias</h2>
+                        <div class="buttons">
+                            <a class="categoria" onclick="toggleSelection(this)">Buracos</a>
+                            <a class="categoria" onclick="toggleSelection(this)">Acidentes</a>
+                            <a class="categoria" onclick="toggleSelection(this)">Acidentes</a>
+                            <!-- cadastrar botões que dirá qual categoria o problema está relacionado -->
+                        </div>
+                    </div>
+                        
+                        <input type="hidden" id="categoriaSelecionada" name="categoriaSelecionada">
+                    </div>
+
+                    <div class="urg">
+                    <div class="checkbox-wrapper-16">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="NU" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                            <span class="checkbox-tile"> 
+                                <span class="checkbox-label">Não Urgente</span>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox-wrapper-16">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="PU" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                            <span class="checkbox-tile">
+                                <span class="checkbox-label">Pouco <br> Urgente</span>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox-wrapper-16">
+                        <label class="checkbox-wrapper">
+                      <input type="checkbox" id="U" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                      <span class="checkbox-tile">
+                          <span class="checkbox-label"> Urgente</span>
+                        </span>
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox-wrapper-16">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="MU" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                            <span class="checkbox-tile">
+                                <span class="checkbox-label">Muito<br> Urgente</span>
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-wrapper-16">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                            <span class="checkbox-tile">
+                                <span class="checkbox-label">Emergência</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script src="js/javascript.js"></script>
+</html>
