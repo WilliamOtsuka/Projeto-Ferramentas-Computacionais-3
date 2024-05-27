@@ -52,25 +52,25 @@
 
                             <button class="signin">Sign In</button>
                         </form>
-
                         <form action="#" class="form sign_up_form">
                             <div class="input_container">
-                                <input type="email" name="" id="emailsu" placeholder="E-mail" required>
+                                <input type="email" name="" id="emailsu" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                 <i class="fa-solid fa-envelope"></i>
                             </div>
 
                             <div class="input_container">
-                                <input type="text" name="" id="document" placeholder="CPF" required>
+                                <input type="text" name="" id="document" placeholder="CPF" pattern="\d{11}" required>
                                 <i class="fa-solid fa-id-card-clip"></i>
                             </div>
 
                             <div class="input_container">
-                                <input type="password" name="" id="senhasu" placeholder="Senha" class="pass1" required>
+                                <input type="password" name="" id="senhasu" placeholder="Senha" class="pass1" pattern="\d*" required>
                                 <i class="fas fa-lock"></i>
                                 <i class="fas fa-eye eye eye1"></i>
                             </div>
-
                             <button onclick="signUp()">Sign Up</button>
+                        </form>
+
                         </form>
                     </div>
                 </div>

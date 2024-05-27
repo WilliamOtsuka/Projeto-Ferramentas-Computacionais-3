@@ -169,18 +169,69 @@ function signUp() {
     var documentValue = documentInput.value;
 
     // Seleciona o campo de entrada de senha pelo ID
+    var passwordInput = document.getElementById('senhasu');
+    // Obtém o valor do campo de entrada de senha
+    var passwordValue = passwordInput.value;
+
+    const usuario = {
+        email: emailValue,
+        senha: passwordValue
+        ,
+        cpf: documentValue,
+        nivel: 1
+    };
+
+    // Check if email contains @
+    if (!usuario.email.includes('@')) {
+        console.error('Invalid email');
+        return;
+    }
+    
+    fetch('http://localhost:8080/apis/security/cadastrar/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(usuario)
+    })
+    .then(response => {
+        if (response.ok) {
+            window.location.reload();
+        }
+        if (response.headers.get('content-type').includes('application/json')) {
+            return response.json();
+        } else {
+            return response.text().then(text => {
+                throw new Error('Server response is not JSON: ' + text);
+            });
+        }
+    })
+    .then(data => console.log(data))
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function login() {
+    // Seleciona o campo de entrada de e-mail pelo ID
+    var emailInput = document.getElementById('email');
+
+    // Obtém o valor do campo de entrada de e-mail
+    var emailValue = emailInput.value;
+
+    // Seleciona o campo de entrada de senha pelo ID
     var passwordInput = document.getElementById('senha');
+
     // Obtém o valor do campo de entrada de senha
     var passwordValue = passwordInput.value;
 
     const usuario = {
         email: emailValue,
         senha: passwordValue,
-        documento: documentValue,
         nivel: 1
     };
     
-    fetch('http://localhost:8080/apis/security/cadastrar/', {
+    fetch('http://localhost:8080/apis/security/logar/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -193,36 +244,3 @@ function signUp() {
         console.error('Error:', error);
     });
 }
-
-// function login() {
-//     // Seleciona o campo de entrada de e-mail pelo ID
-//     var emailInput = document.getElementById('email');
-
-//     // Obtém o valor do campo de entrada de e-mail
-//     var emailValue = emailInput.value;
-
-//     // Seleciona o campo de entrada de senha pelo ID
-//     var passwordInput = document.getElementById('senha');
-
-//     // Obtém o valor do campo de entrada de senha
-//     var passwordValue = passwordInput.value;
-
-//     const usuario = {
-//         email: emailValue,
-//         senha: 123,
-//         nivel: 1
-//     };
-    
-//     fetch('http://localhost:8080/apis/security/logar/', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(usuario)
-//     })
-//     .then(response => response.json())
-//     .then(data => console.log(data))
-//     .catch((error) => {
-//         console.error('Error:', error);
-//     });
-// }
