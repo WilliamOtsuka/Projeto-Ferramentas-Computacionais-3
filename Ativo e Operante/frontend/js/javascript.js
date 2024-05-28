@@ -2,7 +2,36 @@ document.addEventListener('DOMContentLoaded', (event) => {
     checkUserLoggedIn();
 });
 
+window.onload = function() {
     var token = localStorage.getItem('accessToken');
+
+    if (!token) {
+        var btnDenuncie = document.getElementById('btnDenuncie');
+        btnDenuncie.classList.add('disabled');
+        btnDenuncie.addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+    }
+    fetch('http://localhost:8080/apis/cidadao/get-all-orgaos', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        const select = document.querySelector('select');
+        data.forEach(orgao => {
+            const option = document.createElement('option');
+            option.value = orgao.id; // Assuming 'id' is a property of orgao
+            option.textContent = orgao.nome; // Assuming 'name' is a property of orgao
+            select.appendChild(option);
+        });
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+var token = localStorage.getItem('accessToken');
     if(!token) {
         var openBtn = document.querySelector('.login')
         var main = document.querySelector('.main')
@@ -252,7 +281,6 @@ function login() {
         // Armazena o token de acesso no armazenamento local
         localStorage.setItem('accessToken', token);
         localStorage.setItem('userEmail', usuario.email);
-
         // Recarrega a página
         window.location.reload();
     })
@@ -315,3 +343,4 @@ document.getElementById('logoutButton').addEventListener('click', function() {
     // Recarrega a página
     window.location.reload();
 });
+

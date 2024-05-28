@@ -75,6 +75,12 @@ nav img {
     margin: 4px;
 }	 
 
+.disabled {
+    cursor: default !important;
+    pointer-events: none;
+    color: #979797;
+}
+
 .teste{
     display: flex;
     align-items: center;

@@ -1,6 +1,8 @@
 package br.unoeste.fipp.ativooperante2024.restcontrollers;
 
 import br.unoeste.fipp.ativooperante2024.services.OrgaoService;
+import br.unoeste.fipp.ativooperante2024.services.TipoService;
+import br.unoeste.fipp.ativooperante2024.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CidadaoRestController {
     @Autowired
     private OrgaoService orgaoService;
+    private TipoService tipoService;
     @GetMapping("teste-conexao")
     public String testeConexao()
     {
@@ -23,5 +26,10 @@ public class CidadaoRestController {
     public ResponseEntity<Object> buscarTodosOrgaos()
     {
         return new ResponseEntity<>(orgaoService.getAll(), HttpStatus.OK);
+    }
+    @GetMapping("/get-all-tipo")
+    public ResponseEntity<Object> buscarTodosTipos()
+    {
+        return new ResponseEntity<>(tipoService.getAll(),HttpStatus.OK);
     }
 }
