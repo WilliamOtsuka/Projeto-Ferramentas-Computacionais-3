@@ -175,8 +175,7 @@ function signUp() {
 
     const usuario = {
         email: emailValue,
-        senha: passwordValue
-        ,
+        senha: passwordValue,
         cpf: documentValue,
         nivel: 1
     };
@@ -212,35 +211,55 @@ function signUp() {
     });
 }
 
-function login() {
-    // Seleciona o campo de entrada de e-mail pelo ID
-    var emailInput = document.getElementById('email');
-
-    // Obtém o valor do campo de entrada de e-mail
-    var emailValue = emailInput.value;
-
-    // Seleciona o campo de entrada de senha pelo ID
-    var passwordInput = document.getElementById('senha');
-
-    // Obtém o valor do campo de entrada de senha
-    var passwordValue = passwordInput.value;
-
-    const usuario = {
-        email: emailValue,
-        senha: passwordValue,
-        nivel: 1
-    };
-    
-    fetch('http://localhost:8080/apis/security/logar/', {
+function login(usuario) {
+    return fetch('http://localhost:8080/apis/security/logar/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(usuario)
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch((error) => {
-        console.error('Error:', error);
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorText => {
+                console.error('Error status:', response.status, 'Error text:', errorText);
+                throw new Error('Erro ao fazer login');
+            });
+        }
+
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+            return response.json();
+        } else {
+            console.log('The response is not JSON');
+            return null;
+        }
+    });
+}
+
+function signIn() {
+    var emailInput = document.getElementById('email');
+    var emailValue = emailInput.value;
+
+    var passwordInput = document.getElementById('senha');
+    var passwordValue = passwordInput.value;
+
+    const usuario = {
+        email: emailValue,
+        senha: passwordValue
+    };
+
+    login(usuario)
+    .then(userData => {
+        var loginButton = document.getElementById('login');
+
+        if (userData) {
+            loginButton.textContent = emailValue;
+        } else {
+            console.error('User data is null');
+        }
+    })
+    .catch(error => {
+        console.error(error);
     });
 }

@@ -31,6 +31,7 @@ public class AccessRestController {
         //acesso ao BD para verificar a existência do usuário
 
         //comparar a senha
+
         if(user.getSenha() == usuario.getSenha())
         {
             token=JWTTokenProvider.getToken(usuario.getEmail(),""+usuario.getNivel());
