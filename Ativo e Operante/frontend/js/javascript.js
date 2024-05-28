@@ -1,130 +1,137 @@
-var openBtn = document.querySelector('.login')
-var main = document.querySelector('.main')
-var btns = document.querySelectorAll('.btn button')
-var signInBtn = document.querySelector('.sign_in')
-var signUpBtn = document.querySelector('.sign_up')
-var signInForm = document.querySelector('.sign_in_form')
-var signUpForm = document.querySelector('.sign_up_form')
-var inputField = document.querySelectorAll('input')
-var passwordInput = document.querySelector('.pass')
-var eyeBtn = document.querySelector('.eye')
-var passwordInput1 = document.querySelector('.pass1')
-var eyeBtn1 = document.querySelector('.eye1')
-var cross = document.querySelector('.cross')
+document.addEventListener('DOMContentLoaded', (event) => {
+    checkUserLoggedIn();
+});
 
-btns.forEach(btn => {
-    btn.addEventListener('click', ()=>{
+    var token = localStorage.getItem('accessToken');
+    if(!token) {
+        var openBtn = document.querySelector('.login')
+        var main = document.querySelector('.main')
+        var btns = document.querySelectorAll('.btn button')
+        var signInBtn = document.querySelector('.sign_in')
+        var signUpBtn = document.querySelector('.sign_up')
+        var signInForm = document.querySelector('.sign_in_form')
+        var signUpForm = document.querySelector('.sign_up_form')
+        var inputField = document.querySelectorAll('input')
+        var passwordInput = document.querySelector('.pass')
+        var eyeBtn = document.querySelector('.eye')
+        var passwordInput1 = document.querySelector('.pass1')
+        var eyeBtn1 = document.querySelector('.eye1')
+        var cross = document.querySelector('.cross')
+
         btns.forEach(btn => {
-            btn.classList.remove('active')
+            btn.addEventListener('click', ()=>{
+                btns.forEach(btn => {
+                    btn.classList.remove('active')
+                })
+                btn.classList.add('active')
+
+                if(btn.innerText == "Sign In"){
+                    signUpForm.style.display = 'none'
+                    signInForm.style.display = 'block'
+                }
+
+                else{
+                    signInForm.style.display = 'none'
+                    signUpForm.style.display = 'block'
+                }
+            })
         })
-        btn.classList.add('active')
 
-        if(btn.innerText == "Sign In"){
-            signUpForm.style.display = 'none'
-            signInForm.style.display = 'block'
-        }
+        passwordInput.addEventListener('focus', ()=>{
+            if(passwordInput.value.trim() != ''){
+                eyeBtn.style.display = "block"
+            }
 
-        else{
-            signInForm.style.display = 'none'
-            signUpForm.style.display = 'block'
-        }
-    })
-})
+            passwordInput.onkeyup = ()=>{
+                let val = passwordInput.value
+                if(val.trim() != ''){
+                    eyeBtn.style.display = "block"
+                }
+                else{
+                    eyeBtn.style.display = "none"
+                    passwordInput.setAttribute('type','password')
+                    eyeBtn.classList.remove("fa-eye-slash")
+                    eyeBtn.classList.add('fa-eye')
+                }
+            }
+        })
 
-passwordInput.addEventListener('focus', ()=>{
-    if(passwordInput.value.trim() != ''){
-        eyeBtn.style.display = "block"
-    }
+        eyeBtn.addEventListener('click', ()=>{
+            if(passwordInput.type == "password"){
+                passwordInput.setAttribute('type', 'text')
+                eyeBtn.classList.remove("fa-eye")
+                eyeBtn.classList.add('fa-eye-slash')
+            }
 
-    passwordInput.onkeyup = ()=>{
-        let val = passwordInput.value
-        if(val.trim() != ''){
-            eyeBtn.style.display = "block"
-        }
-        else{
+            else{
+                passwordInput.setAttribute('type', 'password')
+                eyeBtn.classList.add("fa-eye")
+                eyeBtn.classList.remove('fa-eye-slash')
+            }
+        })
+
+
+        passwordInput1.addEventListener('focus', ()=>{
+            if(passwordInput1.value.trim() != ''){
+                eyeBtn1.style.display = "block"
+            }
+
+            passwordInput1.onkeyup = ()=>{
+                let val = passwordInput1.value
+                if(val.trim() != ''){
+                    eyeBtn1.style.display = "block"
+                }
+                else{
+                    eyeBtn1.style.display = "none"
+                    passwordInput1.setAttribute('type','password')
+                    eyeBtn1.classList.remove("fa-eye-slash")
+                    eyeBtn1.classList.add('fa-eye')
+                }
+            }
+        })
+
+        eyeBtn1.addEventListener('click', ()=>{
+            if(passwordInput1.type == "password"){
+                passwordInput1.setAttribute('type', 'text')
+                eyeBtn1.classList.remove("fa-eye")
+                eyeBtn1.classList.add('fa-eye-slash')
+            }
+
+            else{
+                passwordInput1.setAttribute('type', 'password')
+                eyeBtn1.classList.add("fa-eye")
+                eyeBtn1.classList.remove('fa-eye-slash')
+            }
+        })
+
+        openBtn.addEventListener('click', ()=>{
+            main.classList.add('active')
             eyeBtn.style.display = "none"
-            passwordInput.setAttribute('type','password')
-            eyeBtn.classList.remove("fa-eye-slash")
-            eyeBtn.classList.add('fa-eye')
-        }
-    }
-})
-
-eyeBtn.addEventListener('click', ()=>{
-    if(passwordInput.type == "password"){
-        passwordInput.setAttribute('type', 'text')
-        eyeBtn.classList.remove("fa-eye")
-        eyeBtn.classList.add('fa-eye-slash')
-    }
-
-    else{
-        passwordInput.setAttribute('type', 'password')
-        eyeBtn.classList.add("fa-eye")
-        eyeBtn.classList.remove('fa-eye-slash')
-    }
-})
-
-
-passwordInput1.addEventListener('focus', ()=>{
-    if(passwordInput1.value.trim() != ''){
-        eyeBtn1.style.display = "block"
-    }
-
-    passwordInput1.onkeyup = ()=>{
-        let val = passwordInput1.value
-        if(val.trim() != ''){
-            eyeBtn1.style.display = "block"
-        }
-        else{
             eyeBtn1.style.display = "none"
+        })
+
+        cross.addEventListener('click', ()=>{
+            main.classList.remove('active')
+            signInBtn.classList.add('active')
+            signUpBtn.classList.remove('active')
+            signInForm.style.display = 'block'
+            signUpForm.style.display = 'none'
+
+            inputField.forEach(inputVal =>{
+                inputVal.value = ""
+            })
+
+            eyeBtn.style.display = 'none'
+            passwordInput.setAttribute('type','password')
+            eyeBtn.classList.add('fa-eye')
+            eyeBtn.classList.remove("fa-eye-slash")
+
+            eyeBtn1.style.display = 'none'
             passwordInput1.setAttribute('type','password')
-            eyeBtn1.classList.remove("fa-eye-slash")
             eyeBtn1.classList.add('fa-eye')
-        }
+            eyeBtn1.classList.remove("fa-eye-slash")
+        })
     }
-})
-
-eyeBtn1.addEventListener('click', ()=>{
-    if(passwordInput1.type == "password"){
-        passwordInput1.setAttribute('type', 'text')
-        eyeBtn1.classList.remove("fa-eye")
-        eyeBtn1.classList.add('fa-eye-slash')
-    }
-
-    else{
-        passwordInput1.setAttribute('type', 'password')
-        eyeBtn1.classList.add("fa-eye")
-        eyeBtn1.classList.remove('fa-eye-slash')
-    }
-})
-
-openBtn.addEventListener('click', ()=>{
-    main.classList.add('active')
-    eyeBtn.style.display = "none"
-    eyeBtn1.style.display = "none"
-})
-
-cross.addEventListener('click', ()=>{
-    main.classList.remove('active')
-    signInBtn.classList.add('active')
-    signUpBtn.classList.remove('active')
-    signInForm.style.display = 'block'
-    signUpForm.style.display = 'none'
-
-    inputField.forEach(inputVal =>{
-        inputVal.value = ""
-    })
-
-    eyeBtn.style.display = 'none'
-    passwordInput.setAttribute('type','password')
-    eyeBtn.classList.add('fa-eye')
-    eyeBtn.classList.remove("fa-eye-slash")
-
-    eyeBtn1.style.display = 'none'
-    passwordInput1.setAttribute('type','password')
-    eyeBtn1.classList.add('fa-eye')
-    eyeBtn1.classList.remove("fa-eye-slash")
-})
 
 function toggleSelection(element) {
     if(element.classList.contains("categoria")) {
@@ -211,8 +218,23 @@ function signUp() {
     });
 }
 
-function login(usuario) {
-    return fetch('http://localhost:8080/apis/security/logar/', {
+function login() {
+    // Seleciona o campo de entrada de e-mail pelo ID
+    var emailInput = document.getElementById('email');
+    // Obtém o valor do campo de entrada de e-mail
+    var emailValue = emailInput.value;
+
+    // Seleciona o campo de entrada de senha pelo ID
+    var passwordInput = document.getElementById('senha');
+    // Obtém o valor do campo de entrada de senha
+    var passwordValue = passwordInput.value;
+
+    const usuario = {
+        email: emailValue,
+        senha: passwordValue
+    };
+    
+    fetch('http://localhost:8080/apis/security/logar/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -220,46 +242,76 @@ function login(usuario) {
         body: JSON.stringify(usuario)
     })
     .then(response => {
-        if (!response.ok) {
-            return response.text().then(errorText => {
-                console.error('Error status:', response.status, 'Error text:', errorText);
-                throw new Error('Erro ao fazer login');
-            });
-        }
-
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.indexOf("application/json") !== -1) {
-            return response.json();
+        if (response.ok) {
+            return response.text();
         } else {
-            console.log('The response is not JSON');
-            return null;
-        }
-    });
-}
-
-function signIn() {
-    var emailInput = document.getElementById('email');
-    var emailValue = emailInput.value;
-
-    var passwordInput = document.getElementById('senha');
-    var passwordValue = passwordInput.value;
-
-    const usuario = {
-        email: emailValue,
-        senha: passwordValue
-    };
-
-    login(usuario)
-    .then(userData => {
-        var loginButton = document.getElementById('login');
-
-        if (userData) {
-            loginButton.textContent = emailValue;
-        } else {
-            console.error('User data is null');
+            throw new Error('Erro ao fazer login: ' + response.statusText);
         }
     })
-    .catch(error => {
-        console.error(error);
+    .then(token => {
+        // Armazena o token de acesso no armazenamento local
+        localStorage.setItem('accessToken', token);
+        localStorage.setItem('userEmail', usuario.email);
+
+        // Recarrega a página
+        window.location.reload();
+    })
+    .catch((error) => {
+        console.error('Error:', error);
     });
 }
+
+function checkUserLoggedIn() {
+    // Obtém o token de acesso e o email do usuário do armazenamento local
+    var token = localStorage.getItem('accessToken');
+    var userEmail = localStorage.getItem('userEmail');
+
+    // Verifica se o token existe
+    if (token) {
+        console.log('Usuário ' + userEmail + ' está logado');
+
+        // Altera o conteúdo da tag <a> para o email do usuário
+        var loginLink = document.querySelector('.login span');
+        loginLink.textContent = userEmail;
+    } else {
+        console.log('Usuário não está logado');
+    }
+}
+
+function logout() {
+    var token = localStorage.getItem('accessToken');
+
+    if(token) {
+        document.getElementById("dropdownLogout").classList.toggle("show");
+        
+        document.addEventListener('click', function(event) {
+            if (!event.target.matches('.login')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        });
+    }
+}
+
+document.getElementById('logoutButton').addEventListener('click', function() {
+    // Faz logout do usuário
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('userEmail');
+
+    // Oculta o dropdown
+    var dropdown = document.getElementById('dropdownLogout');
+    dropdown.style.display = 'none';
+
+    // Altera o conteúdo da tag <a> para 'Login'
+    var loginLink = document.querySelector('.login span');
+    loginLink.textContent = 'Login';
+
+    // Recarrega a página
+    window.location.reload();
+});
