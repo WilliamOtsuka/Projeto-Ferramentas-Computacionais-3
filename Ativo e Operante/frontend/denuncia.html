@@ -20,38 +20,36 @@
                     <li><a href="contato.html">Contato</a></li>
                 </ul>
             </div>
-            <a class="login"><span>Login</span></a>
-            <div id="dropdownLogout" style="display: none;">
-                <button id="logoutButton">Logout</button>
+            <a class="login" onclick="logout()"><span>Login</span></a>
+            <div id="dropdownLogout" class="dropdown-content">
+            <a id="logoutButton">Logout</a>
             </div>
         </nav>
     </header>
     <div class="denuncia">
         <div class="form">
             <p>Denuncie!</p>
-            <form action="" id="contactForm" method="post">
+            <form action="" id="denunciaForm">
                 <div class="func">
                     <div>
                         <div class="input">
                             <span>Título</span>
-                            <input type="text" name="titulo" class="titulo" tabindex=1 style="width: 220px"/>
-                        </div>
-
-                        <div class="input">
-                            <span>CEP</span>
-                            <input type="text" name="name" class="nome" placeholder="xxxxxx-xx" tabindex=1 style="width: 80px;"/>
+                            <div class="input-icon-container">
+                                <input type="text" name="titulo" class="titulo"  id="title" tabindex=1/>
+                                <i class="bi bi-exclamation-circle-fill input-icon"></i>
+                            </div>
                         </div>
                         
                         <div class="input">
                             <span>Denúncia</span>
-                            <textarea class="message" placeholder="Escreva a sua denúncia..." tabindex=4></textarea>
+                            <textarea id="report" class="message" placeholder="Escreva a sua denúncia..." tabindex=4></textarea>
                         </div>
                     </div>
 
                     <div class="vl" style="margin-left: 85px;"></div>
 
                     <div>
-                        <select class="dropdown" >
+                        <select class="dropdown" id="orgao">
                             <option value="">Selecione o Orgão Competente</option>
                             <!-- <option value=""></option> -->
                         </select>
@@ -63,63 +61,64 @@
                             <a class="categoria" onclick="toggleSelection(this)">Acidentes</a> -->
                             <!-- cadastrar botões que dirá qual categoria o problema está relacionado -->
                         </div>
-                    </div>
-                        
                         <input type="hidden" id="categoriaSelecionada" name="categoriaSelecionada">
                     </div>
+                </div>
 
-                    <div class="urg">
+                <div class="urg">
                     <div class="checkbox-wrapper-16">
                         <label class="checkbox-wrapper">
-                            <input type="checkbox" id="NU" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                            <input type="checkbox" id="NU" class="checkbox-input" value="1"  onclick="checkOnlyOne(this)"/>
                             <span class="checkbox-tile"> 
                                 <span class="checkbox-label">Não Urgente</span>
                             </span>
                         </label>
                     </div>
-                    
+                
                     <div class="checkbox-wrapper-16">
                         <label class="checkbox-wrapper">
-                            <input type="checkbox" id="PU" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                            <input type="checkbox" id="PU" class="checkbox-input" value="2"  onclick="checkOnlyOne(this)"/>
                             <span class="checkbox-tile">
                                 <span class="checkbox-label">Pouco <br> Urgente</span>
                             </span>
                         </label>
                     </div>
-                    
+                
                     <div class="checkbox-wrapper-16">
                         <label class="checkbox-wrapper">
-                      <input type="checkbox" id="U" class="checkbox-input" onclick="checkOnlyOne(this)"/>
-                      <span class="checkbox-tile">
-                          <span class="checkbox-label"> Urgente</span>
-                        </span>
+                            <input type="checkbox" id="U" class="checkbox-input" value="3" onclick="checkOnlyOne(this)"/>
+                            <span class="checkbox-tile">
+                                <span class="checkbox-label"> Urgente</span>
+                            </span>
                         </label>
                     </div>
                     
                     <div class="checkbox-wrapper-16">
                         <label class="checkbox-wrapper">
-                            <input type="checkbox" id="MU" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                            <input type="checkbox" id="MU" class="checkbox-input" value="4" onclick="checkOnlyOne(this)"/>
                             <span class="checkbox-tile">
                                 <span class="checkbox-label">Muito<br> Urgente</span>
                             </span>
                         </label>
                     </div>
-
+    
                     <div class="checkbox-wrapper-16">
                         <label class="checkbox-wrapper">
-                            <input type="checkbox" id="" class="checkbox-input" onclick="checkOnlyOne(this)"/>
+                            <input type="checkbox" id="" class="checkbox-input" value="5" onclick="checkOnlyOne(this)"/>
                             <span class="checkbox-tile">
                                 <span class="checkbox-label">Emergência</span>
                             </span>
                         </label>
                     </div>
                 </div>
-                
-                <button type="submit" class="submit">Enviar</button>
+
+                <button class="submit" onclick="submitForm()">Enviar</button>
             </form>
         </div>
     </div>
 </body>
 
 <script src="js/javascript.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  </svg>
 </html>

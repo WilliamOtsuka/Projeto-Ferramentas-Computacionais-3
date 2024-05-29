@@ -421,6 +421,7 @@ form button:hover{
 }
 
 .titulo {
+    width: 100% !important; /* Adjust this value to your needs */
     box-sizing: content-box;
     color:#000000;
     /*fazer com que o placeholder nao seja escondido pelo padding*/
@@ -450,18 +451,39 @@ form button:hover{
 }
 
 .denuncia .form input {
-    background:#ffffff url(http://img7.uploadhouse.com/fileuploads/17737/177370145f09fe433945815665aa214f80dbc6af.png) no-repeat 10px 8px;
     border: #bdbdbd solid 1px;
     border-radius: 10px;
     width: 60px;
     padding-left: 30px;
 }
 
+input:not([type = checlbox]):is(:focus, :valid) + i{
+    color: #a3a3a3;
+}
+
+.input {
+    margin: 10px 0 0 50px;
+}
+
+.input-icon-container {
+    position: relative;
+    display: inline-block;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 35%;
+    transform: translateY(-50%);
+}
+
 .denuncia .form textarea.message {
     background: #ffffff url(http://img3.uploadhouse.com/fileuploads/17737/1773701229ed8c2f465a8274623ca8976adaf196.png) no-repeat 10px 8px;
     border: #bdbdbd solid 1px;
     border-radius: 10px;
+    padding-left: 30px;
 }
+
 
 .vl {
     border-left: 1px solid #b4b4b44b;

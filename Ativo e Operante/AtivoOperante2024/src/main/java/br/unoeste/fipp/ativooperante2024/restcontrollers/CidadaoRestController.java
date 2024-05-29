@@ -13,9 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("apis/cidadao/")
 public class CidadaoRestController {
+    private final TipoService tipoService;
+
     @Autowired
     private OrgaoService orgaoService;
-    private TipoService tipoService;
+    public CidadaoRestController(TipoService tipoService) {
+        this.tipoService = tipoService;
+    }
+
     @GetMapping("teste-conexao")
     public String testeConexao()
     {
@@ -27,7 +32,7 @@ public class CidadaoRestController {
     {
         return new ResponseEntity<>(orgaoService.getAll(), HttpStatus.OK);
     }
-    @GetMapping("/get-all-tipo")
+    @GetMapping("/get-all-tipos")
     public ResponseEntity<Object> buscarTodosTipos()
     {
         return new ResponseEntity<>(tipoService.getAll(),HttpStatus.OK);

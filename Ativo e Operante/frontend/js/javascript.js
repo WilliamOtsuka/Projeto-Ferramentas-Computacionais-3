@@ -12,6 +12,8 @@ window.onload = function() {
             event.preventDefault();
         });
     }
+
+    // Fetch para pegar os orgãos
     fetch('http://localhost:8080/apis/cidadao/get-all-orgaos', {
         method: 'GET',
         headers: {
@@ -23,13 +25,257 @@ window.onload = function() {
         const select = document.querySelector('select');
         data.forEach(orgao => {
             const option = document.createElement('option');
-            option.value = orgao.id; // Assuming 'id' is a property of orgao
-            option.textContent = orgao.nome; // Assuming 'name' is a property of orgao
+            option.value = orgao.id;
+            option.textContent = orgao.nome;
             select.appendChild(option);
         });
     })
     .catch(error => console.error('Error:', error));
+
+    // Fetch para pegar as categorias
+    fetch('http://localhost:8080/apis/cidadao/get-all-tipos', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        //<div class="buttons">
+        const select = document.querySelector('.buttons');
+        data.forEach(categoria => {
+            // <a class="categoria" onclick="toggleSelection(this)">exemplo</a>
+            const a = document.createElement('a');
+            a.classList.add('categoria');
+            a.textContent = categoria.nome;
+            a.onclick = function() {
+                toggleSelection(this);
+                setValue(categoria.id);
+            };
+            select.appendChild(a);
+        });
+    })
+    .catch(error => console.error('Error:', error));
 }
+function signUp() {
+    // Seleciona o campo de entrada de e-mail pelo ID
+    var emailInput = document.getElementById('emailsu');
+    // Obtém o valor do campo de entrada de e-mail
+    var emailValue = emailInput.value;
+
+    // Seleciona o campo de entrada de documento pelo ID
+    var documentInput = document.getElementById('document');
+    // Obtém o valor do campo de entrada de documento
+    var documentValue = documentInput.value;
+
+    // Seleciona o campo de entrada de senha pelo ID
+    var passwordInput = document.getElementById('senhasu');
+    // Obtém o valor do campo de entrada de senha
+    var passwordValue = passwordInput.value;
+
+    const usuario = {
+        email: emailValue,
+        senha: passwordValue,
+        cpf: documentValue,
+        nivel: 1
+    };
+
+    // Check if email contains @
+    if (!usuario.email.includes('@')) {
+        console.error('Invalid email');
+        return;
+    }
+    
+    fetch('http://localhost:8080/apis/security/cadastrar/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(usuario)
+    })
+    .then(response => {
+        if (response.ok) {
+            window.location.reload();
+        }
+        if (response.headers.get('content-type').includes('application/json')) {
+            return response.json();
+        } else {
+            return response.text().then(text => {
+                throw new Error('Server response is not JSON: ' + text);
+            });
+        }
+    })
+    .then(data => console.log(data))
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function login() {
+    // Seleciona o campo de entrada de e-mail pelo ID
+    var emailInput = document.getElementById('email');
+    // Obtém o valor do campo de entrada de e-mail
+    var emailValue = emailInput.value;
+
+    // Seleciona o campo de entrada de senha pelo ID
+    var passwordInput = document.getElementById('senha');
+    // Obtém o valor do campo de entrada de senha
+    var passwordValue = passwordInput.value;
+
+    const usuario = {
+        email: emailValue,
+        senha: passwordValue
+    };
+    
+    fetch('http://localhost:8080/apis/security/logar/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(usuario)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        } else {
+            throw new Error('Erro ao fazer login: ' + response.statusText);
+        }
+    })
+    .then(token => {
+        // Armazena o token de acesso no armazenamento local
+        localStorage.setItem('accessToken', token);
+        localStorage.setItem('userEmail', usuario.email);
+        localStorage.setItem('userId', usuario.id);
+        localStorage.setItem('userPassword', usuario.senha);
+        localStorage.setItem('userCpf', usuario.cpf);
+        localStorage.setItem('userNivel', usuario.nivel);
+        // Recarrega a página
+        window.location.reload();
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function checkUserLoggedIn() {
+    // Obtém o token de acesso e o email do usuário do armazenamento local
+    var token = localStorage.getItem('accessToken');
+    var userEmail = localStorage.getItem('userEmail');
+
+    // Verifica se o token existe
+    if (token) {
+        console.log('Usuário ' + userEmail + ' está logado');
+
+        // Altera o conteúdo da tag <a> para o email do usuário
+        var loginLink = document.querySelector('.login span');
+        loginLink.textContent = userEmail;
+    } else {
+        console.log('Usuário não está logado');
+    }
+}
+
+function logout() {
+    var token = localStorage.getItem('accessToken');
+
+    if(token) {
+        document.getElementById("dropdownLogout").classList.toggle("show");
+        
+        document.addEventListener('click', function(event) {
+            if (!event.target.matches('.login')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        });
+    }
+}
+
+document.getElementById('logoutButton').addEventListener('click', function() {
+    // Faz logout do usuário
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('userEmail');
+
+    // Oculta o dropdown
+    var dropdown = document.getElementById('dropdownLogout');
+    dropdown.style.display = 'none';
+
+    // Altera o conteúdo da tag <a> para 'Login'
+    var loginLink = document.querySelector('.login span');
+    loginLink.textContent = 'Login';
+
+    // Recarrega a página
+    window.location.reload();
+});
+
+function submitForm() {
+    var titleInput = document.getElementById('title').value;
+    var reportInput = document.getElementById('report').value;
+    var orgaoInput = {
+        id: document.getElementById('orgao').value,
+        nome: document.getElementById('orgao').options[document.getElementById('orgao').selectedIndex].text
+    };
+    var categoriaInput = {
+        id: document.getElementById('categoriaSelecionada').value,
+        nome: document.querySelector('.selected').textContent
+    };
+
+    var urgencyInput = selectedValue;
+    var user = {
+        id: localStorage.getItem('userId'),
+        email: localStorage.getItem('userEmail'),
+        senha: localStorage.getItem('userPassword'),
+        cpf: localStorage.getItem('userCpf'),
+        nivel: localStorage.getItem('userNivel')
+    };
+    
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    
+    day = (day < 10) ? '0' + day : day;
+    month = (month < 10) ? '0' + month : month;
+    
+    var formattedDate = year + '-' + month + '-' + day;
+        
+    var denuncia = {
+        titulo: titleInput,
+        texto: reportInput,
+        urgencia: urgencyInput,
+        data: formattedDate,
+        orgao: orgaoInput,
+        tipo: categoriaInput,
+        usuario: user
+    };
+
+    fetch('http://localhost:8080/apis/reports/gerarDenuncia/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(denuncia)
+    })
+    .then(response => {
+        if (response.headers.get('content-type').includes('application/json')) {
+            return response.json();
+        } else {
+            return response.text().then(text => {
+                throw new Error('Server response is not JSON: ' + text);
+            });
+        }
+    })
+    .then(data => console.log(data))
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+//---------------------------------------------------------------------------------
 
 var token = localStorage.getItem('accessToken');
     if(!token) {
@@ -163,19 +409,17 @@ var token = localStorage.getItem('accessToken');
     }
 
 function toggleSelection(element) {
-    if(element.classList.contains("categoria")) {
-        // Remove a classe "selected" de todos os elementos
-        var buttons = document.getElementsByClassName("selected");
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].classList.add("categoria");
-        }
+    // Remove a classe "selected" de todos os elementos e adiciona a classe "categoria"
+    var buttons = document.querySelectorAll(".selected");
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("selected");
+        buttons[i].classList.add("categoria");
+    }
 
+    // Se o elemento clicado já tem a classe "categoria", remove "categoria" e adiciona "selected"
+    if(element.classList.contains("categoria")) {
         element.classList.remove("categoria");
         element.classList.add("selected");
-    }
-    else {
-        element.classList.remove("selected");
-        element.classList.add("categoria");
     }
 }
 
@@ -184,163 +428,22 @@ function setValue(value) {
     document.getElementById("categoriaSelecionada").value = value;
 }
 
+var selectedValue; // Global variable to store the selected value
+
 function checkOnlyOne(clickedCheckbox) {
     var checkboxes = document.getElementsByClassName('checkbox-input');
     for (var i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i] !== clickedCheckbox) {
             checkboxes[i].checked = false;
-        }
-    }
-}
-
-function signUp() {
-    // Seleciona o campo de entrada de e-mail pelo ID
-    var emailInput = document.getElementById('emailsu');
-    // Obtém o valor do campo de entrada de e-mail
-    var emailValue = emailInput.value;
-
-    // Seleciona o campo de entrada de documento pelo ID
-    var documentInput = document.getElementById('document');
-    // Obtém o valor do campo de entrada de documento
-    var documentValue = documentInput.value;
-
-    // Seleciona o campo de entrada de senha pelo ID
-    var passwordInput = document.getElementById('senhasu');
-    // Obtém o valor do campo de entrada de senha
-    var passwordValue = passwordInput.value;
-
-    const usuario = {
-        email: emailValue,
-        senha: passwordValue,
-        cpf: documentValue,
-        nivel: 1
-    };
-
-    // Check if email contains @
-    if (!usuario.email.includes('@')) {
-        console.error('Invalid email');
-        return;
-    }
-    
-    fetch('http://localhost:8080/apis/security/cadastrar/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(usuario)
-    })
-    .then(response => {
-        if (response.ok) {
-            window.location.reload();
-        }
-        if (response.headers.get('content-type').includes('application/json')) {
-            return response.json();
         } else {
-            return response.text().then(text => {
-                throw new Error('Server response is not JSON: ' + text);
-            });
+            selectedValue = checkboxes[i].value; // Store the value of the selected checkbox
         }
-    })
-    .then(data => console.log(data))
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
-
-function login() {
-    // Seleciona o campo de entrada de e-mail pelo ID
-    var emailInput = document.getElementById('email');
-    // Obtém o valor do campo de entrada de e-mail
-    var emailValue = emailInput.value;
-
-    // Seleciona o campo de entrada de senha pelo ID
-    var passwordInput = document.getElementById('senha');
-    // Obtém o valor do campo de entrada de senha
-    var passwordValue = passwordInput.value;
-
-    const usuario = {
-        email: emailValue,
-        senha: passwordValue
-    };
-    
-    fetch('http://localhost:8080/apis/security/logar/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(usuario)
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.text();
-        } else {
-            throw new Error('Erro ao fazer login: ' + response.statusText);
-        }
-    })
-    .then(token => {
-        // Armazena o token de acesso no armazenamento local
-        localStorage.setItem('accessToken', token);
-        localStorage.setItem('userEmail', usuario.email);
-        // Recarrega a página
-        window.location.reload();
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
-
-function checkUserLoggedIn() {
-    // Obtém o token de acesso e o email do usuário do armazenamento local
-    var token = localStorage.getItem('accessToken');
-    var userEmail = localStorage.getItem('userEmail');
-
-    // Verifica se o token existe
-    if (token) {
-        console.log('Usuário ' + userEmail + ' está logado');
-
-        // Altera o conteúdo da tag <a> para o email do usuário
-        var loginLink = document.querySelector('.login span');
-        loginLink.textContent = userEmail;
-    } else {
-        console.log('Usuário não está logado');
     }
 }
 
-function logout() {
-    var token = localStorage.getItem('accessToken');
-
-    if(token) {
-        document.getElementById("dropdownLogout").classList.toggle("show");
-        
-        document.addEventListener('click', function(event) {
-            if (!event.target.matches('.login')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        });
-    }
+var orgaoValue = document.getElementById('orgao').value;
+if (orgaoValue === "") {
+    console.error('Nenhum orgão selecionado');
+} else {
+    console.log('Orgão selecionado:', orgaoValue);
 }
-
-document.getElementById('logoutButton').addEventListener('click', function() {
-    // Faz logout do usuário
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('userEmail');
-
-    // Oculta o dropdown
-    var dropdown = document.getElementById('dropdownLogout');
-    dropdown.style.display = 'none';
-
-    // Altera o conteúdo da tag <a> para 'Login'
-    var loginLink = document.querySelector('.login span');
-    loginLink.textContent = 'Login';
-
-    // Recarrega a página
-    window.location.reload();
-});
-
