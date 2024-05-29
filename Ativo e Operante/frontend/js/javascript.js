@@ -86,7 +86,7 @@ function signUp() {
         return;
     }
     
-    fetch('http://localhost:8080/apis/security/cadastrar/', {
+    fetch('http://localhost:8080/apis/security/cadastrar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -127,7 +127,7 @@ function login() {
         senha: passwordValue
     };
     
-    fetch('http://localhost:8080/apis/security/logar/', {
+    fetch('http://localhost:8080/apis/security/logar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -145,10 +145,7 @@ function login() {
         // Armazena o token de acesso no armazenamento local
         localStorage.setItem('accessToken', token);
         localStorage.setItem('userEmail', usuario.email);
-        localStorage.setItem('userId', usuario.id);
-        localStorage.setItem('userPassword', usuario.senha);
-        localStorage.setItem('userCpf', usuario.cpf);
-        localStorage.setItem('userNivel', usuario.nivel);
+        localStorage.setItem('userNivel', token.nivel);
         // Recarrega a página
         window.location.reload();
     })
@@ -161,6 +158,15 @@ function checkUserLoggedIn() {
     // Obtém o token de acesso e o email do usuário do armazenamento local
     var token = localStorage.getItem('accessToken');
     var userEmail = localStorage.getItem('userEmail');
+    var userNivel = localStorage.getItem('userNivel');
+
+    //printa o nivel do usuario
+    console.log('Nivel do usuario: ' + userNivel);
+            
+    if (userNivel === 2) {
+        var sidebar = document.querySelector('.sidebar');
+        sidebar.style.display = 'block';
+    }
 
     // Verifica se o token existe
     if (token) {
@@ -253,7 +259,7 @@ function submitForm() {
         usuario: user
     };
 
-    fetch('http://localhost:8080/apis/reports/gerarDenuncia/', {
+    fetch('http://localhost:8080/apis/reports/gerarDenuncia', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -447,3 +453,5 @@ if (orgaoValue === "") {
 } else {
     console.log('Orgão selecionado:', orgaoValue);
 }
+
+

@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mainTable {
+    display: flex;
+    justify-content: center;
+}
+
+table, td, th {
+    border: 1px solid black;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 13px;
+    background-color: #ffffff;
+}
+
+th {
+    padding: 10px 20px 10px 20px;
+}
+
+tr {
+    text-align: center;
+}
+  
+.elem {
+    padding: 10px;
+}
+
+button {
+    background-color: #ffffff;
+    color: #f26065;
+    cursor: pointer;
+    width: 100%;
+    height: 40px;
+    border: none;
+}
+
+button:hover {
+    background-color: #f2606536;
+    color: #ff0000;
+}
+
+.edit-input {
+    width: 76px;
+    height: 40px;
+    text-align: center;
+    border: none;
+}

@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @CrossOrigin
-@RequestMapping("apis/security/")
+@RequestMapping("apis/security")
 public class AccessRestController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @PostMapping("logar/")
+    @PostMapping("/logar")
     public ResponseEntity<Object> logar(@RequestBody Usuario usuario)
     {
         String token = "não autenticado";
@@ -40,7 +40,7 @@ public class AccessRestController {
         return ResponseEntity.badRequest().body(token);
     }
 
-    @PostMapping("cadastrar/")
+    @PostMapping("/cadastrar")
     public ResponseEntity<Object> cadastrar(@RequestBody Usuario usuario) {
         Usuario existingUser = usuarioRepository.findByEmail(usuario.getEmail());
 

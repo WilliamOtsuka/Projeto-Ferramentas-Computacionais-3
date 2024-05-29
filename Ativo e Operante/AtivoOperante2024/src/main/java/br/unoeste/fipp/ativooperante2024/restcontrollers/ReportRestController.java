@@ -21,7 +21,7 @@ import java.sql.ResultSet;
 
 @RestController
 @CrossOrigin
-@RequestMapping("apis/reports/")
+@RequestMapping("apis/reports")
 public class ReportRestController {
     @Autowired
     private DenunciaRepository denunciaRepository;
@@ -56,7 +56,7 @@ public class ReportRestController {
         return pdf;
     }
 
-    @PostMapping("gerarDenuncia/")
+    @PostMapping("/gerarDenuncia")
     public ResponseEntity<Object> gerarDenuncia(@RequestBody Denuncia denuncia) {
         Denuncia novo;
         novo = denunciaService.save(denuncia);

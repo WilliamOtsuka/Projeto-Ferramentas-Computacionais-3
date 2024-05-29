@@ -148,6 +148,31 @@ nav img {
     display: block;
 }
 
+.sidebar {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 20;
+    left: 0;
+    background-color: #ffffff;
+    border: #7e7e7e2a 1px solid;
+    padding-top: 10px;
+    display: none;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 8px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f26065;
+}
+
 .open_form{
     position: relative;
     padding: 20px 30px;
@@ -842,3 +867,4 @@ a.categoria:hover {
     top: -30px;
     left: -30px;
 }
+

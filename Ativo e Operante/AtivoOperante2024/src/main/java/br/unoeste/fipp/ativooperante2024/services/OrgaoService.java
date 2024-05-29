@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrgaoService {
@@ -34,5 +35,14 @@ public class OrgaoService {
             return false;
         }
         return true;
+    }
+
+    public Orgao update(Orgao orgao) {
+        Optional<Orgao> existingOrgao = repo.findById(orgao.getId());
+        if (existingOrgao.isPresent()) {
+            return repo.save(orgao);
+        } else {
+            return null;
+        }
     }
 }

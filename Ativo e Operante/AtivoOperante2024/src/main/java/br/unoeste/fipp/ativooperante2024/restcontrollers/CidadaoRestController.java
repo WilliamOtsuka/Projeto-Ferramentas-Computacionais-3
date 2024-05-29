@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("apis/cidadao/")
+@RequestMapping("apis/cidadao")
 public class CidadaoRestController {
     private final TipoService tipoService;
 
@@ -21,7 +21,7 @@ public class CidadaoRestController {
         this.tipoService = tipoService;
     }
 
-    @GetMapping("teste-conexao")
+    @GetMapping("/teste-conexao")
     public String testeConexao()
     {
         return "conectado";
