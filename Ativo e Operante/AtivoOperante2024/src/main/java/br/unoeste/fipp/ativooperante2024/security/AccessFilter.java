@@ -18,18 +18,35 @@ public class AccessFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         String token = req.getHeader("Authorization");
-        if(token != null && JWTTokenProvider.verifyToken(token)) {
-            Claims claims = JWTTokenProvider.getAllClaimsFromToken(token);
-            String nivel = claims.get("nivel", String.class);
-            if(nivel != null && nivel.equals("2")) {
-                chain.doFilter(request, response);
+
+
+        if(token != null && token.startsWith("Bearer ")) {
+
+            token = token.substring(7);
+            System.out.println("Token de verificação: " + token);
+
+            if(JWTTokenProvider.verifyToken(token)) {
+                chain.doFilter(request,response);
+
+//                Claims claims = JWTTokenProvider.getAllClaimsFromToken(token);
+//                String nivel = claims.get("nivel", String.class);
+//                if(nivel != null && nivel.equals("2")) {
+//                    chain.doFilter(request, response);
+//                } else {
+//                    ((HttpServletResponse)response).setStatus(403);
+//                    response.getOutputStream().write("Access denied".getBytes());
+//                }
             } else {
-                ((HttpServletResponse)response).setStatus(403);
-                response.getOutputStream().write("Access denied".getBytes());
+                HttpServletResponse httpResponse = (HttpServletResponse) response;
+                httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                httpResponse.getWriter().write("Acesso não autorizado");
+//            ((HttpServletResponse)response).setStatus(401);
+//            response.getOutputStream().write("Unauthorized".getBytes());
             }
         } else {
-            ((HttpServletResponse)response).setStatus(401);
-            response.getOutputStream().write("Unauthorized".getBytes());
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            httpResponse.getWriter().write("Acesso não autorizado");
         }
     }
 }

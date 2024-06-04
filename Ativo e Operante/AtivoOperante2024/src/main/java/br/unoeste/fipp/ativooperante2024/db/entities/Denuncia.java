@@ -35,7 +35,7 @@ public class Denuncia {
     }
 
     public Denuncia(Long id, String titulo, String texto, int urgencia, LocalDate data, Orgao orgao, Tipo tipo, Usuario usuario) {
-        Id = id;
+        this.Id = id;
         this.titulo = titulo;
         this.texto = texto;
         this.urgencia = urgencia;
@@ -50,7 +50,7 @@ public class Denuncia {
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.Id = id;
     }
 
     public String getTitulo() {

@@ -4,12 +4,16 @@ import br.unoeste.fipp.ativooperante2024.db.entities.Usuario;
 import br.unoeste.fipp.ativooperante2024.db.repositories.UsuarioRepository;
 import br.unoeste.fipp.ativooperante2024.security.JWTTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -22,6 +26,8 @@ public class AccessRestController {
     public ResponseEntity<Object> logar(@RequestBody Usuario usuario)
     {
         String token = "não autenticado";
+        Map<String, Object> response = new HashMap<>();
+        response.put("token", token);
 
         Usuario user = usuarioRepository.findByEmail(usuario.getEmail());
 
@@ -34,10 +40,15 @@ public class AccessRestController {
 
         if(user.getSenha() == usuario.getSenha())
         {
-            token=JWTTokenProvider.getToken(usuario.getEmail(),""+usuario.getNivel());
-            return ResponseEntity.ok(token);
+            response.put("usuario", user);
+
+            response.put("success",true);
+
+            token=JWTTokenProvider.getToken(user.getEmail(),""+user.getNivel());
+            response.put("token", token);
         }
-        return ResponseEntity.badRequest().body(token);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     @PostMapping("/cadastrar")

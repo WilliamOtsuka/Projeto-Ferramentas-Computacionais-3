@@ -16,7 +16,7 @@ public class JWTTokenProvider {
             "MINHACHAVESECRETA_MINHACHAVESECRETA".getBytes(StandardCharsets.UTF_8));
 
     static public String getToken(String usuario,String nivel) 
-    {       
+    {
         String jwtToken = Jwts.builder()
             .setSubject("usuario")
             .setIssuer("localhost:8080")
@@ -26,7 +26,7 @@ public class JWTTokenProvider {
                 .atZone(ZoneId.systemDefault()).toInstant()))
             .signWith(CHAVE)
             .compact();
-        return jwtToken;        
+        return jwtToken;
     }
 
     static public boolean verifyToken(String token)
@@ -35,7 +35,7 @@ public class JWTTokenProvider {
             Jwts.parserBuilder()
                 .setSigningKey(CHAVE)
                 .build()
-                .parseClaimsJws(token).getSignature();
+                .parseClaimsJws(token);//.getSignature();
                 return true;
        } catch (Exception e) {
                 System.out.println(e);

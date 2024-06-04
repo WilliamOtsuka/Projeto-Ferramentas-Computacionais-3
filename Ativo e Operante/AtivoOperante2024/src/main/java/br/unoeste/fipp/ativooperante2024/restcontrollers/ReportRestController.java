@@ -5,11 +5,16 @@ import br.unoeste.fipp.ativooperante2024.db.entities.Denuncia;
 import br.unoeste.fipp.ativooperante2024.db.entities.Orgao;
 import br.unoeste.fipp.ativooperante2024.db.repositories.DenunciaRepository;
 import br.unoeste.fipp.ativooperante2024.db.repositories.OrgaoRepository;
+import br.unoeste.fipp.ativooperante2024.db.repositories.TipoRepository;
+import br.unoeste.fipp.ativooperante2024.db.repositories.UsuarioRepository;
 import br.unoeste.fipp.ativooperante2024.services.DenunciaService;
 import br.unoeste.fipp.ativooperante2024.services.OrgaoService;
+import br.unoeste.fipp.ativooperante2024.services.TipoService;
+import br.unoeste.fipp.ativooperante2024.services.UsuarioService;
 import net.sf.jasperreports.engine.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,6 +30,17 @@ import java.sql.ResultSet;
 public class ReportRestController {
     @Autowired
     private DenunciaRepository denunciaRepository;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private OrgaoService orgaoService;
+
+    @Autowired
+    private TipoService tipoService;
+
+
     DenunciaService denunciaService;
     private ResourceLoader resourceLoader;
 
@@ -57,9 +73,29 @@ public class ReportRestController {
     }
 
     @PostMapping("/gerarDenuncia")
-    public ResponseEntity<Object> gerarDenuncia(@RequestBody Denuncia denuncia) {
-        Denuncia novo;
-        novo = denunciaService.save(denuncia);
-        return new ResponseEntity<>(novo, HttpStatus.OK);
+    public ResponseEntity<Object> gerarDenuncia(@RequestParam String titulo,
+                                                @RequestParam String texto,
+                                                @RequestParam Long IDOrgao,
+                                                @RequestParam Long IDTipo,
+                                                @RequestParam int urgencia,
+                                                @RequestParam Long IDusuario) {
+        Denuncia denuncia = new Denuncia();
+        denuncia.setTitulo(titulo);
+        denuncia.setTexto(texto);
+        denuncia.setUrgencia(urgencia);
+        denuncia.setOrgao(orgaoService.getById(IDOrgao));
+
+
+        denuncia.setTipo(tipoService.getById(IDTipo));
+        denuncia.setUsuario(usuarioService.getById(IDusuario));
+
+        System.out.println(denuncia.toString());
+        try {
+            denunciaRepository.save(denuncia);
+
+            return ResponseEntity.ok("Denuncia cadastrada com sucesso");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Erro ao cadastrar denuncia: " + e.getMessage());
+        }
     }
 }
