@@ -1,5 +1,8 @@
 package br.unoeste.fipp.ativooperante2024.db.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +16,7 @@ public class Feedback {
     private String texto;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="den_id")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private Denuncia denuncia;
 
     public Feedback() {
@@ -31,6 +35,13 @@ public class Feedback {
         this.id = id;
     }
 
+    public Denuncia getDenuncia() {
+        return denuncia;
+    }
+    public void setDenuncia(Denuncia denuncia) {
+        this.denuncia = denuncia;
+    }
+
     public String getTexto() {
         return texto;
     }
@@ -38,4 +49,6 @@ public class Feedback {
     public void setTexto(String texto) {
         this.texto = texto;
     }
+
+
 }

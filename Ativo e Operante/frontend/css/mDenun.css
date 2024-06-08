@@ -1,0 +1,42 @@
+h1 {
+    text-align: center;
+    margin: 20px;
+    color: #000000;
+
+}
+
+h2 {
+    padding-top: 10px;
+    user-select: none;
+}
+
+
+
+.mDen {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.den {
+    background-color: #fff;
+    border-radius: 30px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.den:hover {
+    cursor: pointer;
+    background-color: #ffffff9f;
+}
+
+#denunciaDetails {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    padding-top: 10px;
+}
+
+p {
+    padding: 3px;
+}

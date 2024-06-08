@@ -14,9 +14,10 @@ function toggleSelection(element) {
     }
 }
 
-function setValue(value) {
+function setValue(id, name) {
     // Define o valor do campo oculto com o valor do botão selecionado
-    document.getElementById("categoriaSelecionada").value = value;
+    document.getElementById("categoriaSelecionada").value = id;
+    document.getElementById("categoriaSelecionada").name = name;
 }
 
 var selectedValue;
@@ -69,7 +70,7 @@ window.onload = function() {
             a.textContent = categoria.nome;
             a.onclick = function() {
                 toggleSelection(this);
-                setValue(categoria.id);
+                setValue(categoria.id, categoria.nome);
             };
             select.appendChild(a);
         });
@@ -77,76 +78,19 @@ window.onload = function() {
     .catch(error => console.error('Error:', error));
 }
 
-function submitForm() {
-    // preventDefault();
+function submitForm(event) {
+    // event.preventDefault();
 
-    // Seleciona o campo de titulo pelo ID
-    var titleInput = document.getElementById('title');
-    // Obtém o valor do campo de titulo
-    var titleValue = titleInput.value;
-    console.log("Titulo: " + titleValue);
+    var formulario = document.getElementById("denunciaForm");
+    var idUser = localStorage.getItem("id");
 
-
-    // Seleciona o campo de denuncia pelo ID
-    var denunciaInput = document.getElementById('report');
-    // Obtém o valor do campo de denuncia
-    var denunciaValue = denunciaInput.value;
-    console.log("Denuncia: " + denunciaValue);
-
-    // Seleciona o campo de orgaos pelo ID
-    var orgaoInput = document.getElementById('orgao');
-    // Obtém o valor do campo de orgaos
-    var orgaoValue = parseInt(orgaoInput.value, 10);
-    console.log("Orgao: " + orgaoValue);
-
-    // Seleciona o campo de categorias pelo ID
-    var categoriaInput = document.getElementById('categoriaSelecionada');
-    // Obtém o valor do campo de categorias
-    var categoriaValue = parseInt(categoriaInput.value, 10);
-    console.log("Categoria: " + categoriaValue);
-
-    // Seleciona o campo de urgencia pelo ID
-    var urgenciaValue = selectedValue;
-    console.log("Urgencia: " + urgenciaValue);
-
-    usuarioID = Number(localStorage.getItem('id'));
-    console.log("ID do usuario: " + usuarioID);
-    
-    fetch('http://localhost:8080/apis/reports/gerarDenuncia', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            titulo: titleValue,
-            texto: denunciaValue,
-            IDOrgao: orgaoValue,
-            IDTipo: categoriaValue,
-            urgencia: urgenciaValue,
-            IDusuario: usuarioID
-        })
+    fetch("http://localhost:8080/apis/cidadao/add-denuncia", {
+        method: 'POST', body: (new FormData(formulario), idUser)
     })
-    .then(response => {
-        return response.json();
-    }) 
-    .then(data => {
-        console.log(data);
-        window.location.href = "denuncia.html";
-    }
-    )
-    //     if (response.ok) {
-    //         window.location.reload();
-    //     }
-    //     if (response.headers.get('content-type').includes('application/json')) {
-    //         return response.json();
-    //     } else {
-    //         return response.text().then(text => {
-    //             throw new Error('Server response is not JSON: ' + text);
-    //         });
-    //     }
-    // })
-    // .then(data => console.log(data))
-    .catch((error) => {
-        console.error('Error:', error);
+    .then(resp => {
+        return console.log(resp);
+    })
+    .catch(error => {
+        console.error('Erro na requisição:', error);
     });
 }
