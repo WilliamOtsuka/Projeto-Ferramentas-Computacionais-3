@@ -1,11 +1,15 @@
 package br.unoeste.fipp.ativooperante2024.restcontrollers;
 
 import br.unoeste.fipp.ativooperante2024.db.entities.Denuncia;
+import br.unoeste.fipp.ativooperante2024.db.entities.Feedback;
 import br.unoeste.fipp.ativooperante2024.db.entities.Orgao;
 import br.unoeste.fipp.ativooperante2024.db.entities.Tipo;
 import br.unoeste.fipp.ativooperante2024.db.repositories.DenunciaRepository;
+import br.unoeste.fipp.ativooperante2024.db.repositories.FeedbackRepository;
 import br.unoeste.fipp.ativooperante2024.db.repositories.OrgaoRepository;
 import br.unoeste.fipp.ativooperante2024.db.repositories.TipoRepository;
+import br.unoeste.fipp.ativooperante2024.services.DenunciaService;
+import br.unoeste.fipp.ativooperante2024.services.FeedbackService;
 import br.unoeste.fipp.ativooperante2024.services.OrgaoService;
 import br.unoeste.fipp.ativooperante2024.services.TipoService;
 import org.aspectj.weaver.ast.Or;
@@ -22,6 +26,15 @@ public class AdminRestController {
 
     @Autowired
     TipoService tipoService;
+
+    @Autowired
+    DenunciaService denunciaService;
+
+    @Autowired
+    FeedbackService feedbackService;
+
+    @Autowired
+    FeedbackRepository feedbackrepo;
 
     @Autowired
     DenunciaRepository denunciarepo;
@@ -82,6 +95,41 @@ public class AdminRestController {
     {
         return new ResponseEntity<>(denunciarepo.findById(id).
                 orElse(new Denuncia()),HttpStatus.OK);
+    }
+
+    @GetMapping("/get-all-denuncias")
+    public ResponseEntity<Object> buscarTodasDenuncias()
+    {
+        return new ResponseEntity<>(denunciaService.getAll(),HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete-denuncia")
+    public ResponseEntity<Object> excluirDenuncia(@RequestParam(value="id") Long id)
+    {
+        if(denunciaService.delete(id))
+            return new ResponseEntity<>("",HttpStatus.OK);
+        else
+            return new ResponseEntity<>("",HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/add-feedback")
+    public ResponseEntity<Object> salvarFeedback (@RequestBody Feedback feedback)
+    {
+        // Pega a Denuncia
+        Denuncia denuncia = denunciarepo.findById(feedback.getDenuncia().getId()).orElse(null);
+        if (denuncia == null) {
+            return new ResponseEntity<>("Denuncia not found", HttpStatus.NOT_FOUND);
+        }
+        // Verifica se já existe um feedback para a denuncia
+        Feedback existingFeedback = feedbackrepo.findByDenunciaId(denuncia.getId());
+        if (existingFeedback != null) {
+            return new ResponseEntity<>("Feedback already exists", HttpStatus.BAD_REQUEST);
+        }
+        feedback.setDenuncia(denuncia);
+
+        Feedback novo;
+        novo=feedbackService.save(feedback);
+        return new ResponseEntity<>(novo, HttpStatus.OK);
     }
 
     @GetMapping("/get-all-tipos")

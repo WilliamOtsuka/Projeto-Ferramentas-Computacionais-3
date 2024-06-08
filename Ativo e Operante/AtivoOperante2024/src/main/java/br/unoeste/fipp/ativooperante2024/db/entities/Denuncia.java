@@ -1,5 +1,9 @@
 package br.unoeste.fipp.ativooperante2024.db.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -27,7 +31,8 @@ public class Denuncia {
     @ManyToOne
     @JoinColumn(name="usu_id",nullable = false)
     private Usuario usuario;
-    @OneToOne(mappedBy = "denuncia")
+    @OneToOne(mappedBy = "denuncia", fetch = FetchType.LAZY)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private Feedback feedback;
 
     public Denuncia() {
@@ -107,5 +112,12 @@ public class Denuncia {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
+    }
+    public Feedback getFeedback() {
+        return feedback;
     }
 }

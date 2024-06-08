@@ -110,9 +110,74 @@ function deletarOrgao(id) {
     .catch(error => console.error('Error:', error));
 }
 
+
+document.getElementById('add').addEventListener('click', function() {
+    //cria a linha da tabela
+    const tabela = document.querySelector("table");
+    const tr = document.createElement('tr');
+    const tdId = document.createElement('td');
+    const tdNome = document.createElement('td');
+
+    const tdEditar = document.createElement('td');
+    const btnEditar = document.createElement('button');
+    btnEditar.textContent = 'Editar';
+    btnEditar.className = 'edit';
+    
+    const tdDeletar = document.createElement('td');
+    const btnDeletar = document.createElement('button');
+    btnDeletar.textContent = 'Deletar';
+    btnDeletar.className = 'delete';
+
+    tabela.appendChild(tr);
+    tr.appendChild(tdId);
+    tr.appendChild(tdNome);
+
+    tdEditar.appendChild(btnEditar);
+    tr.appendChild(tdEditar);
+
+    tdDeletar.appendChild(btnDeletar);
+    tr.appendChild(tdDeletar);
+
+    //cria o input para o novo orgao
+    const input = document.createElement('input');
+    input.id = 'nome';
+    input.className = 'edit-input';
+    tdNome.appendChild(input);
+    input.focus();
+    
+    //adiciona o evento de salvar o novo orgao
+    input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            const nome = document.getElementById('nome').value;
+            return fetch('http://localhost:8080/apis/adm/add-orgao', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nome: nome
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                //apaga a linha da tabela
+                tabela.removeChild(tr);
+                
+                window.location.reload();
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => console.error('Error:', error));
+        };
+    });
+});
+
 // Buscar todos os orgaos quando a página carregar
 window.onload = buscarTodosOrgaos;
-
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

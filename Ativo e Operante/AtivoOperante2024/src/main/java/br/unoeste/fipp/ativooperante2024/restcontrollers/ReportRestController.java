@@ -12,6 +12,7 @@ import br.unoeste.fipp.ativooperante2024.services.OrgaoService;
 import br.unoeste.fipp.ativooperante2024.services.TipoService;
 import br.unoeste.fipp.ativooperante2024.services.UsuarioService;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.type.NamedEnumConstantContextualDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.repository.query.Param;
@@ -23,9 +24,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 
 @RestController
-@CrossOrigin
 @RequestMapping("apis/reports")
 public class ReportRestController {
     @Autowired
@@ -70,32 +71,5 @@ public class ReportRestController {
             pdf = null;
         }
         return pdf;
-    }
-
-    @PostMapping("/gerarDenuncia")
-    public ResponseEntity<Object> gerarDenuncia(@RequestParam String titulo,
-                                                @RequestParam String texto,
-                                                @RequestParam Long IDOrgao,
-                                                @RequestParam Long IDTipo,
-                                                @RequestParam int urgencia,
-                                                @RequestParam Long IDusuario) {
-        Denuncia denuncia = new Denuncia();
-        denuncia.setTitulo(titulo);
-        denuncia.setTexto(texto);
-        denuncia.setUrgencia(urgencia);
-        denuncia.setOrgao(orgaoService.getById(IDOrgao));
-
-
-        denuncia.setTipo(tipoService.getById(IDTipo));
-        denuncia.setUsuario(usuarioService.getById(IDusuario));
-
-        System.out.println(denuncia.toString());
-        try {
-            denunciaRepository.save(denuncia);
-
-            return ResponseEntity.ok("Denuncia cadastrada com sucesso");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erro ao cadastrar denuncia: " + e.getMessage());
-        }
     }
 }
