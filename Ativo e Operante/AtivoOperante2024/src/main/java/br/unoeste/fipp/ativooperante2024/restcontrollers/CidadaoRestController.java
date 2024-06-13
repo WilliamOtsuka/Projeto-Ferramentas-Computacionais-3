@@ -62,11 +62,69 @@ public class CidadaoRestController {
     {
         return new ResponseEntity<>(orgaoService.getAll(), HttpStatus.OK);
     }
+    @GetMapping("/get-all-denuncias")
+    public ResponseEntity<Object> buscarTodasDenuncias()
+    {
+        return new ResponseEntity<>(denunciaService.getAll(),HttpStatus.OK);
+    }
+
     @GetMapping("/get-all-tipos")
     public ResponseEntity<Object> buscarTodosTipos()
     {
         return new ResponseEntity<>(tipoService.getAll(),HttpStatus.OK);
     }
+<<<<<<< HEAD
+//
+//    @PostMapping("/add-denuncia")
+//    public ResponseEntity<Object> salvarDenuncia(@RequestParam(value="denName") String titulo,
+//                                                 @RequestParam(value="report") String texto,
+//                                                 @RequestParam(value="orgao") Long idOrgao,
+//                                                 @RequestParam(value="categoriaSelecionada") Long idCategoria,
+//                                                 @RequestParam(value="urgencia") int urgencia,
+//                                                 @RequestParam Long idUser) {
+//
+//        try{
+//            System.out.println(titulo+" "+idOrgao+" "+idCategoria+" "+urgencia+" "+texto+" ");
+//            System.out.println("teste");
+//
+//            Denuncia denuncia = new Denuncia();
+//
+//            System.out.println(orgaoService.getById(idOrgao));
+//            System.out.println(usuarioService.getById(1L).getCpf());
+//
+//            denuncia.setTitulo(titulo);
+//            denuncia.setTexto(texto);
+//
+//            denuncia.setUrgencia(urgencia);
+//
+//            denuncia.setOrgao(orgaoService.getById((idOrgao)));
+//            denuncia.setData(LocalDate.now());
+//            denuncia.setTipo(tipoService.getById((idCategoria)));
+//
+//            denuncia.setUsuario(usuarioService.getById(idUser));
+//
+//            try
+//            {
+//                denunciaService.save(denuncia);
+//
+//            }catch(Exception e){
+//                return ResponseEntity.badRequest().body("Erro "+e.getMessage());
+//            }
+//
+//        }catch(Exception e){
+//            return ResponseEntity.badRequest().body("Erro "+e.getMessage());
+//        }
+//
+//        return ResponseEntity.ok("INSERIDO");
+//    }
+
+    @PostMapping("/add-denuncia")
+    public ResponseEntity<Object> salvarDenuncia(@RequestBody Denuncia denuncia) {
+
+        try{
+            denuncia.setData(LocalDate.now());
+            denunciaService.save(denuncia);
+=======
 
     @PostMapping("/add-denuncia")
     public ResponseEntity<Object> salvarDenuncia(@RequestParam(value="denName") String titulo,
@@ -103,6 +161,7 @@ public class CidadaoRestController {
             }catch(Exception e){
                 return ResponseEntity.badRequest().body("Erro "+e.getMessage());
             }
+>>>>>>> 47b25cd4bd9662ea4c9dd422c28e49e2b2a50b9a
 
         }catch(Exception e){
             return ResponseEntity.badRequest().body("Erro "+e.getMessage());
@@ -111,6 +170,8 @@ public class CidadaoRestController {
         return ResponseEntity.ok("INSERIDO");
     }
 
+<<<<<<< HEAD
+=======
 //    @PostMapping("/gerarDenuncia")
 //    public ResponseEntity<Object> gerarDenuncia(@RequestParam String titulo,
 //                                                @RequestParam String texto,
@@ -140,6 +201,7 @@ public class CidadaoRestController {
 //        }
 //    }
 
+>>>>>>> 47b25cd4bd9662ea4c9dd422c28e49e2b2a50b9a
     @GetMapping("/get-denuncias-by-user")
     public ResponseEntity<Object> getDenunciasByUsuario(@RequestParam Long userId) {
         Usuario user = usuarioRepository.findById(userId).orElse(null);

@@ -7,8 +7,35 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="assets/favicon/favicon.png" type="image/x-icon">
+
 </head>
 <body>
+<<<<<<< HEAD
+    <!----------------------------------------------------------MENU----------------------------------------------------------------------------------->
+
+    <nav>
+        <div class="teste">
+            <img src="assets/favicon/favicon.png" alt="">
+            <a href="index.html" class="logo"> Ativo e Operante</a>
+        </div>
+        <div class="list">
+            <ul class="nav-list">
+                <li><a href="">Home</a></li>
+                <li><a href="denuncia.html" id="btnDenuncie">Denuncie!</a></li>
+                <li><a href="denunciasEnviadas.html">Minhas denuncias!</a></li>
+            </ul>
+        </div>
+        <a class="login" id="login"><span>Login</span></a>
+        <div id="dropdownLogout" class="dropdown-content">
+            <a id="logoutButton">Logout</a>
+        </div>
+    </nav>
+
+
+    <!------------------------------------------------------div de login/singin--------------------------------------------------------------------------------->
+
+=======
     <header>  
         <nav>
             <div class="teste">
@@ -28,6 +55,7 @@
             </div>
         </nav>
     </header>
+>>>>>>> 47b25cd4bd9662ea4c9dd422c28e49e2b2a50b9a
     <div class="main">
         <div class="wrapper">
             <h2>Faça Login Para Continuar</h2>
@@ -45,14 +73,15 @@
                                 <input type="email" name="" id="email" placeholder="E-mail" required>
                                 <i class="fas fa-user-circle"></i>
                             </div>
-
+                            <p id="emailError" class="error-login">
+                                
                             <div class="input_container">
                                 <input type="password" name="" id="senha" placeholder="Password" class="pass" required>
                                 <i class="fas fa-lock"></i>
-                                <i class="fas fa-eye eye"></i>
                             </div>
+                            <p id="passwordError" class="error-login"></p>
 
-                            <button class="signin" onclick="login()">Sign In</button>
+                            <button class="signin" onclick="login(event)">Sign In</button>
                         </form>
                         <form action="#" class="form sign_up_form">
                             <div class="input_container">
@@ -80,12 +109,61 @@
         </div>
     </div>
 
+    <!---------------------------------------------------side bar------------------------------------------------------------------------------>
+
     <div class="sidebar">
         <a href="crudProblemas.html">CRUD de Problemas</a>
         <a href="crudOrgaos.html">CRUD de Órgãos Competentes</a>
         <a href="tabelaDenuncias.html">Tabela de Denúncias</a>
     </div>
-</body>
+
+    <!---------------------------------------------------main------------------------------------------------------------------------------>
+    <div class="body">
+
+        <div class="">
+            <div class="hero-image">
+                <div class="hero-text">
+                    <h1>Ativo e Operante</h1>
+                    <h3>Seja bem vindo ao site que te ajuda a criar denuncias relacionadas a sua cidade!</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-buttons">
+            <a href="denuncia.html" class="card-button">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Denuncie!</h1>
+                    </div>
+                    <div class="card-body">
+                        <p>Denuncie problemas relacionados a sua cidade, como buracos, falta de iluminação, entre outros.</p>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="denunciasEnviadas.html" class="card-button">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Minhas Denuncias</h1>
+                        </div>
+                    <div class="card-body">
+                        <p>Veja as suas denuncias enviadas e o status delas.</p>
+                    </div>
+                </div>
+            </a>
+        </div> 
+        
+        <div class="footer-content">
+            <div class="descricao">
+                <h3>Ativo e Operante</h3>
+                <p>Site desenvolvido para a disciplina de Ferramentas Computacionais III</p>
+            </div>
+            <div class="participantes">
+                <p>William Akio Otsuka - 26212560-9</p>
+                <p>Christian Deniel Ruiz Ambrosio - 26212555-2</p>
+            </div>
+        </div>
+ </div>
 
 <script src="js/javascript.js"></script>
 </html>

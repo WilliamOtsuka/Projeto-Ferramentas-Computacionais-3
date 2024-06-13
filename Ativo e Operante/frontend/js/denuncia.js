@@ -23,7 +23,7 @@ function setValue(id, name) {
 var selectedValue;
 function checkOnlyOne(clickedCheckbox) {
     var checkboxes = document.getElementsByClassName('checkbox-input');
-    for (var i = 0; i < checkboxes.length; i++) {
+    for (var i = 0; i < checkboxes.length; i++) {   
         if (checkboxes[i] !== clickedCheckbox) {
             checkboxes[i].checked = false;
         } else {
@@ -31,6 +31,25 @@ function checkOnlyOne(clickedCheckbox) {
         }
     }
 }
+
+function getUrgencia() {
+    var checkboxes = document.querySelectorAll('#urgencia .checkbox-input');
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+            return checkboxes[i].value;
+        }
+    }
+    return null; // retorna null se nenhum checkbox estiver marcado
+}
+
+function getSelectedCategoriaNome() {
+    var selectedLink = document.querySelector('.selected');
+    if (selectedLink) {
+        return selectedLink.textContent;
+    } else {
+        return null; // retorna null se nenhuma categoria estiver selecionada
+    }
+}   
 
 window.onload = function() {
     // Fetch para pegar os orgãos
@@ -81,6 +100,42 @@ window.onload = function() {
 function submitForm(event) {
     // event.preventDefault();
 
+<<<<<<< HEAD
+    var titulo = document.getElementById("title").value;
+    var texto = document.getElementById("report").value;
+    var urgencia = getUrgencia();
+    var usuarioId = localStorage.getItem("id");
+    var orgaoId = document.getElementById("orgao").value;
+    var tipoNome = getSelectedCategoriaNome();
+    var tipoId=document.getElementById("categoriaSelecionada").value;
+    
+
+    console.log("TipoId:",tipoId);
+    console.log("tipoNome:",tipoNome);
+
+    var denuncia = {
+        titulo: titulo,
+        texto: texto,
+        urgencia: urgencia,
+        orgao: { id: orgaoId },
+        tipo: {id: tipoId},
+        usuario: { id:usuarioId}
+    }
+    fetch('http://localhost:8080/apis/cidadao/add-denuncia', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(denuncia)
+    }).then(response => {  
+        if(response.ok) {
+            alert("Denúncia enviada com sucesso!");
+            window.location.href = "index.html";
+        } else {
+            alert("Erro ao enviar denúncia!");
+        }
+    })
+=======
     var formulario = document.getElementById("denunciaForm");
     var idUser = localStorage.getItem("id");
 
@@ -93,4 +148,5 @@ function submitForm(event) {
     .catch(error => {
         console.error('Erro na requisição:', error);
     });
+>>>>>>> 47b25cd4bd9662ea4c9dd422c28e49e2b2a50b9a
 }
