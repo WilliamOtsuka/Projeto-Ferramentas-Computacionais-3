@@ -122,9 +122,13 @@ function darFeedback(feedback, denID, tdDarFeedback) {
         })
     .then(data => console.log(data))
     .catch((error) => {
+<<<<<<< HEAD
         alert("Erro ao enviar o feedback!");
         tdDarFeedback.textContent = 'Erro ao enviar feedback';
 
+=======
+        tdDarFeedback.textContent = 'Erro ao enviar feedback';
+>>>>>>> 47b25cd4bd9662ea4c9dd422c28e49e2b2a50b9a
     });
 }
 
@@ -138,7 +142,11 @@ function deletarDenuncia(id) {
     })
     .then(response => {
         if (!response.ok) {
+<<<<<<< HEAD
             alert("Feedback já cadastrado! Não é possível deletar a denúncia!");
+=======
+            throw new Error(`HTTP error! status: ${response.status}`);
+>>>>>>> 47b25cd4bd9662ea4c9dd422c28e49e2b2a50b9a
         }
         return response.json();
     })
