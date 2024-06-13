@@ -122,7 +122,9 @@ function darFeedback(feedback, denID, tdDarFeedback) {
         })
     .then(data => console.log(data))
     .catch((error) => {
+        alert("Erro ao enviar o feedback!");
         tdDarFeedback.textContent = 'Erro ao enviar feedback';
+
     });
 }
 
@@ -136,7 +138,7 @@ function deletarDenuncia(id) {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            alert("Feedback já cadastrado! Não é possível deletar a denúncia!");
         }
         return response.json();
     })

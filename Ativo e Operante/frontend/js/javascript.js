@@ -1,3 +1,5 @@
+var token = localStorage.getItem('token');
+
 document.addEventListener('DOMContentLoaded', (event) => {
         
     checkUserLoggedIn();
@@ -65,7 +67,8 @@ function signUp() {
     });
 }
 
-async function login() {
+async function login(event) {
+    event.preventDefault();
     // Seleciona o campo de entrada de e-mail pelo ID
     var emailInput = document.getElementById('email');
     // Obtém o valor do campo de entrada de e-mail
@@ -75,6 +78,21 @@ async function login() {
     var passwordInput = document.getElementById('senha');
     // Obtém o valor do campo de entrada de senha
     var passwordValue = passwordInput.value;
+
+    var emailError = document.getElementById('emailError');
+    var passwordError = document.getElementById('passwordError');
+
+    if(emailInput.value === '') {
+        emailError.textContent = 'Email is required';
+    } else {
+        emailError.textContent = '';
+    }
+
+    if(passwordInput.value === '') {
+        passwordError.textContent = 'Password is required';
+    } else {
+        passwordError.textContent = '';
+    }
 
     const usuario = {
         email: emailValue,
@@ -130,7 +148,6 @@ async function login() {
 }
 
 function checkUserLoggedIn() {
-    var token = localStorage.getItem('token');
     // Obtém o token de acesso e o email do usuário do armazenamento local
     var userEmail = localStorage.getItem('userEmail');
     var userNivel = localStorage.getItem('nivel');
@@ -142,6 +159,9 @@ function checkUserLoggedIn() {
         try {
             var sidebar = document.querySelector('.sidebar');
             sidebar.style.display = 'block';
+
+            var body = document.querySelector('.body');
+            body.style.marginLeft = '200px';
         } catch (error) {
         }
     }
@@ -158,26 +178,30 @@ function checkUserLoggedIn() {
     }
 }
 
-function logout() {
-    var token = localStorage.getItem('token');
+if(token) {    
+    var login = document.getElementById('login');
+    var dropdownLogout = document.getElementById('dropdownLogout');
 
-    if(token) {
-        document.getElementById("dropdownLogout").classList.toggle("show");
-        
-        document.addEventListener('click', function(event) {
-            if (!event.target.matches('.login')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        });
-    }
+    login.addEventListener('click', function(event) {
+        event.stopPropagation();
+        console.log('Clicou no login');
+
+        if(dropdownLogout.classList.contains('show')) {
+            dropdownLogout.classList.remove('show');
+        } else {
+            dropdownLogout.classList.add('show');
+        }
+    });
+
+    document.addEventListener('click', function(event) {
+        var isClickInside = login.contains(event.target);
+
+        if (!isClickInside) {
+            dropdownLogout.classList.remove('show');
+        }
+    });
 }
+
 
 document.getElementById('logoutButton').addEventListener('click', function() {
     window.location.href = 'index.html';
@@ -186,6 +210,9 @@ document.getElementById('logoutButton').addEventListener('click', function() {
     localStorage.removeItem('token');
     localStorage.removeItem('userEmail');
     localStorage.removeItem('nivel');
+    localStorage.removeItem('cpf');
+    localStorage.removeItem('id');
+    localStorage.removeItem('senha');
 
     // Oculta o dropdown
     var dropdown = document.getElementById('dropdownLogout');
@@ -203,7 +230,6 @@ document.getElementById('logoutButton').addEventListener('click', function() {
 
 //---------------------------------------------------------------------------------
 
-var token = localStorage.getItem('token');
     if(!token) {
         var openBtn = document.querySelector('.login')
         var main = document.querySelector('.main')
