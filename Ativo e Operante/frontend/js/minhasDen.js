@@ -18,7 +18,6 @@ function denuncias() {
     fetch(`http://localhost:8080/apis/cidadao/get-denuncias-by-user?userId=${userId}`)
     .then(response => {
         if (!response.ok) {
-<<<<<<< HEAD
 
             var denuncias = document.createElement('div');
             denuncias.className = 'den';
@@ -31,8 +30,6 @@ function denuncias() {
 
             document.body.appendChild(denuncias);
             
-=======
->>>>>>> 47b25cd4bd9662ea4c9dd422c28e49e2b2a50b9a
             throw new Error('Network response was not ok');
         }
         return response.json();
@@ -71,15 +68,11 @@ function denuncias() {
             var br = document.createElement('br');
 
             var feedback = document.createElement('p');
-<<<<<<< HEAD
             try {
                 feedback.textContent = "Feedback: " + den.feedback.texto;
             }catch(e) {
                 feedback.textContent = "Feedback: " + "Ainda não foi dado um feedback";
             }
-=======
-            feedback.textContent = "Feedback: " + den.feedback.texto;
->>>>>>> 47b25cd4bd9662ea4c9dd422c28e49e2b2a50b9a
 
             details.appendChild(descricao);
             details.appendChild(urgencia);

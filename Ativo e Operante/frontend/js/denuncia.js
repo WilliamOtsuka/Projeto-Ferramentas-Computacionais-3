@@ -100,7 +100,6 @@ window.onload = function() {
 function submitForm(event) {
     // event.preventDefault();
 
-<<<<<<< HEAD
     var titulo = document.getElementById("title").value;
     var texto = document.getElementById("report").value;
     var urgencia = getUrgencia();
@@ -135,18 +134,4 @@ function submitForm(event) {
             alert("Erro ao enviar denúncia!");
         }
     })
-=======
-    var formulario = document.getElementById("denunciaForm");
-    var idUser = localStorage.getItem("id");
-
-    fetch("http://localhost:8080/apis/cidadao/add-denuncia", {
-        method: 'POST', body: (new FormData(formulario), idUser)
-    })
-    .then(resp => {
-        return console.log(resp);
-    })
-    .catch(error => {
-        console.error('Erro na requisição:', error);
-    });
->>>>>>> 47b25cd4bd9662ea4c9dd422c28e49e2b2a50b9a
 }
