@@ -127,4 +127,3 @@ public class CidadaoRestController {
         return new ResponseEntity<>(denuncias, HttpStatus.OK);
     }
 }
-
